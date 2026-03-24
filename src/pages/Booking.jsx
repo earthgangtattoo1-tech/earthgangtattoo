@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Calendar, CreditCard, Shield, Lock, Check, ChevronRight, ChevronLeft, Clock, User, FileText, QrCode, MessageCircle, Banknote } from 'lucide-react'
 import { format, addDays, startOfDay, isSameDay, setHours, setMinutes, isBefore } from 'date-fns'
 import config, { STUDIO } from '../config'
+import SEO from '../components/SEO'
 import { sendBookingEmail } from '../emailSender'
 
 const { artists, services, deposit } = config
@@ -109,7 +110,9 @@ export default function Booking() {
       ]
 
   return (
-    <div className="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+    <>
+      <SEO title="Book a Tattoo — Free Consultation Available" description="Book your tattoo session online at Earth Gang Tattoo Chiang Mai. Choose from TOON or Roonie, pick your date & time. Free 30-min consultation available. 500 THB deposit. Cash, PromptPay & Card accepted." path="/booking" />
+      <div className="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         {/* Progress */}
         <div className="mb-12">
@@ -598,5 +601,6 @@ export default function Booking() {
         </AnimatePresence>
       </div>
     </div>
+    </>
   )
 }

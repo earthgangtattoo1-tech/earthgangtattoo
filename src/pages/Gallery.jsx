@@ -33,7 +33,9 @@ export default function Gallery() {
   const filtered = active === 'All' ? galleryItems : galleryItems.filter(i => i.category === active)
 
   return (
-    <div className="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+    <>
+      <SEO title="Tattoo Gallery — Chiang Mai Portfolio" description="Browse Earth Gang Tattoo's portfolio of fine line, realism, traditional, neo-traditional & watercolor tattoos. See our work from Chiang Mai's top artists TOON & Roonie." path="/gallery" />
+      <div className="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-neon-red text-sm font-semibold uppercase tracking-widest mb-3">
@@ -154,5 +156,6 @@ export default function Gallery() {
         </motion.div>
       </div>
     </div>
+    </>
   )
 }

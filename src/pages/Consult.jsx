@@ -144,7 +144,9 @@ export default function Consult() {
   }
 
   return (
-    <div className="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+    <>
+      <SEO title="AI Tattoo Design Consultation" description="Get instant AI-powered tattoo design advice from Earth Gang Tattoo Chiang Mai. Describe your idea and get expert recommendations for style, placement, sizing & pricing. Free consultation available." path="/consult" />
+      <div className="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <motion.div ref={ref} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="text-center mb-12">
           <motion.div custom={0} variants={fadeInUp}>
@@ -258,5 +260,6 @@ export default function Consult() {
         </motion.p>
       </div>
     </div>
+    </>
   )
 }

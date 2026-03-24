@@ -6,6 +6,7 @@ import {
   Flame, ArrowRight, Sparkles, Crown
 } from 'lucide-react'
 import config, { STUDIO } from '../config'
+import SEO from '../components/SEO'
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -37,7 +38,9 @@ export default function Home() {
   const heroRef = useRef(null)
 
   return (
-    <div className="overflow-hidden">
+    <>
+      <SEO title="Best Tattoo Studio in Chiang Mai" description="Earth Gang Tattoo — Chiang Mai's #1 tattoo studio. Fine Line, Realism & Traditional tattoos by TOON & Roonie. Book online, free consultation. 141/3 ถ.กำแพงดิน, Chiang Mai 50100." path="/" />
+      <div className="overflow-hidden">
       {/* ===== HERO ===== */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
@@ -355,5 +358,6 @@ export default function Home() {
         </div>
       </Section>
     </div>
+    </>
   )
 }
