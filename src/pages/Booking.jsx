@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Calendar, CreditCard, Shield, Lock, Check, ChevronRight, ChevronLeft, Clock, User, FileText, QrCode, MessageCircle, Banknote } from 'lucide-react'
 import { format, addDays, startOfDay, isSameDay, setHours, setMinutes, isBefore } from 'date-fns'
 import config, { STUDIO } from '../config'
+import { sendBookingEmail } from '../emailSender'
 
 const { artists, services, deposit } = config
 
@@ -72,15 +73,11 @@ export default function Booking() {
     setBookings(updated)
     localStorage.setItem('eg_bookings', JSON.stringify(updated))
 
-    // Send to backend API for email notifications
+    // Send email notifications directly via Resend
     try {
-      await fetch('/api/book', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newBooking),
-      })
+      await sendBookingEmail(newBooking)
     } catch (err) {
-      console.log('API call failed:', err.message)
+      console.log('Email failed:', err.message)
     }
 
     setPaymentDone(true)

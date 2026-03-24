@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MessageCircle, X, Send } from 'lucide-react'
 import { STUDIO } from '../config'
+import { sendChatMessage } from '../emailSender'
 
 const faqResponses = {
   pricing: {
@@ -91,13 +92,9 @@ export default function ChatWidget() {
       // If bot gives the fallback response, send the message to your email
       if (response.includes('call us at')) {
         try {
-          await fetch('/api/contact', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name: '', email: '', message: msgText }),
-          })
+          await sendChatMessage('', msgText)
         } catch (e) {
-          console.log('Contact API failed:', e.message)
+          console.log('Email failed:', e.message)
         }
       }
     }, 800 + Math.random() * 1200)
