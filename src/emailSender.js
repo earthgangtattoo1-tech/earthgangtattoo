@@ -4,7 +4,7 @@
 
 const RESEND_API_KEY = 're_NEDYiuX8_3mKbEoPcaZnF9jj3gD41qs8t'
 const FROM_EMAIL = 'noreply@earthgangtattoo.net'
-const OWNER_EMAIL = 'earthgangtattoo@gmail.com'
+const OWNER_EMAIL = 'earthgangtattoo1@gmail.com'
 
 export async function sendBookingEmail(booking) {
   const { name, email, phone, artist, date, time, bookingType, service, notes, reference } = booking
