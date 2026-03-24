@@ -211,7 +211,7 @@ export async function onRequestPost(context) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Earth Gang Tattoo <noreply@earthgangtattoo.net>',
+        from: 'Earth Gang Tattoo <onboarding@resend.dev>',
         to: [
           'earthgangtattoo@gmail.com',  // Notification to you
           email,                         // Confirmation to customer
