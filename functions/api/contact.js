@@ -65,11 +65,11 @@ export async function onRequestPost(context) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Earth Gang Tattoo <onboarding@resend.dev>',
+        from: 'Earth Gang Tattoo <noreply@earthgangtattoo.net>',
         to: 'earthgangtattoo@gmail.com',
         subject: `💬 New message from website chat — ${name || 'Anonymous'}`,
         html,
-        reply_to: email || 'onboarding@resend.dev',
+        reply_to: email || 'noreply@earthgangtattoo.net',
       }),
     })
 
