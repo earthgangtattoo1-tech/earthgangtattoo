@@ -165,10 +165,8 @@ export default function Home() {
           className="max-w-2xl mx-auto group relative rounded-2xl overflow-hidden border border-white/5 hover:border-white/10 transition-all duration-500"
           style={{ background: 'linear-gradient(135deg, #111111 0%, #1a1a1a 100%)' }}
         >
-          <div className="aspect-[4/3] bg-gradient-to-br from-gold/20 to-amber-900/10 relative overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Crown className="w-24 h-24 text-gold/20 group-hover:text-gold/30 transition-colors duration-500" />
-            </div>
+          <div className="aspect-[4/3] relative overflow-hidden">
+            <img src="/Non.jpg.jpg" alt="Nont - CEO & Founder" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
             <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#111111] to-transparent" />
           </div>
 
