@@ -55,19 +55,34 @@ export default function Booking() {
   const isSlotBooked = (hour) => bookedSlots.some(b => b.hour === hour)
   const next14Days = Array.from({ length: 14 }, (_, i) => addDays(today, i))
 
-  const handleCompleteBooking = () => {
+  const handleCompleteBooking = async () => {
     const ref = generateRef()
     setReference(ref)
     const newBooking = {
       ...booking,
       date: booking.date.toISOString(),
       hour: booking.time.hour,
+      time: booking.time.label,
+      artist: { name: booking.artist.name, id: booking.artist.id },
+      bookingType,
       reference: ref,
       createdAt: new Date().toISOString(),
     }
     const updated = [...bookings, newBooking]
     setBookings(updated)
     localStorage.setItem('eg_bookings', JSON.stringify(updated))
+
+    // Send to backend API for email notifications
+    try {
+      await fetch('/api/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newBooking),
+      })
+    } catch (err) {
+      console.log('API call failed:', err.message)
+    }
+
     setPaymentDone(true)
     setStep(5)
   }

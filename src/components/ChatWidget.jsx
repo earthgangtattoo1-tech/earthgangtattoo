@@ -79,13 +79,27 @@ export default function ChatWidget() {
 
     const userMsg = { id: Date.now(), from: 'user', text: input.trim() }
     setMessages((prev) => [...prev, userMsg])
+    const msgText = input.trim()
     setInput('')
     setIsTyping(true)
 
-    setTimeout(() => {
-      const response = getResponse(userMsg.text)
+    setTimeout(async () => {
+      const response = getResponse(msgText)
       setMessages((prev) => [...prev, { id: Date.now() + 1, from: 'bot', text: response }])
       setIsTyping(false)
+
+      // If bot gives the fallback response, send the message to your email
+      if (response.includes('call us at')) {
+        try {
+          await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: '', email: '', message: msgText }),
+          })
+        } catch (e) {
+          console.log('Contact API failed:', e.message)
+        }
+      }
     }, 800 + Math.random() * 1200)
   }
 
