@@ -1,6 +1,6 @@
 import { MapPin, Clock, Phone, Camera, Mail, Flame } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import config from '../config'
+import config, { STUDIO } from '../config'
 
 const { studio } = config
 
@@ -25,10 +25,10 @@ export default function Footer() {
               <a href="#" className="w-10 h-10 rounded-lg bg-white/5 hover:bg-neon-red/20 hover:text-neon-red flex items-center justify-center text-gray-500 transition-all duration-300">
                 <Camera className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-lg bg-white/5 hover:bg-neon-red/20 hover:text-neon-red flex items-center justify-center text-gray-500 transition-all duration-300">
+              <a href={`tel:${STUDIO.phoneRaw}`} className="w-10 h-10 rounded-lg bg-white/5 hover:bg-neon-red/20 hover:text-neon-red flex items-center justify-center text-gray-500 transition-all duration-300">
                 <Phone className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-lg bg-white/5 hover:bg-neon-red/20 hover:text-neon-red flex items-center justify-center text-gray-500 transition-all duration-300">
+              <a href={`mailto:${STUDIO.email}`} className="w-10 h-10 rounded-lg bg-white/5 hover:bg-neon-red/20 hover:text-neon-red flex items-center justify-center text-gray-500 transition-all duration-300">
                 <Mail className="w-4 h-4" />
               </a>
             </div>
@@ -60,15 +60,15 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-neon-red mt-0.5 shrink-0" />
-                <span className="text-gray-500 text-sm whitespace-pre-line">{studio.address}</span>
+                <span className="text-gray-500 text-sm">{STUDIO.address}</span>
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="w-4 h-4 text-neon-red mt-0.5 shrink-0" />
-                <span className="text-gray-500 text-sm">{studio.phone}</span>
+                <span className="text-gray-500 text-sm">{STUDIO.phone}</span>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-4 h-4 text-neon-red mt-0.5 shrink-0" />
-                <span className="text-gray-500 text-sm">{studio.email}</span>
+                <span className="text-gray-500 text-sm">{STUDIO.email}</span>
               </li>
             </ul>
           </div>
@@ -77,15 +77,13 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Hours</h3>
             <ul className="space-y-3">
-              {studio.hours.map((h) => (
-                <li key={h.day} className="flex items-center gap-3">
-                  <Clock className="w-4 h-4 text-neon-red shrink-0" />
-                  <div className="text-sm">
-                    <p className="text-gray-400">{h.day}</p>
-                    <p className="text-gray-500">{h.time}</p>
-                  </div>
-                </li>
-              ))}
+              <li className="flex items-center gap-3">
+                <Clock className="w-4 h-4 text-neon-red shrink-0" />
+                <div className="text-sm">
+                  <p className="text-gray-400">{STUDIO.hoursNote}</p>
+                  <p className="text-gray-500">{STUDIO.hours}</p>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
@@ -96,7 +94,7 @@ export default function Footer() {
             © 2026 {studio.name}. All rights reserved.
           </p>
           <p className="text-gray-700 text-xs">
-            Designed with 🔥 in Bangkok
+            Designed with 🔥 in Chiang Mai
           </p>
         </div>
       </div>

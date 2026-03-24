@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MessageCircle, X, Send } from 'lucide-react'
+import { STUDIO } from '../config'
 
 const faqResponses = {
   pricing: {
@@ -13,15 +14,15 @@ const faqResponses = {
   },
   hours: {
     keywords: ['hours', 'open', 'close', 'when', 'time', 'schedule', 'appointment', 'available'],
-    answer: '🕐 **Studio Hours**\n\n• Monday - Friday: 11:00 AM - 9:00 PM\n• Saturday - Sunday: 10:00 AM - 10:00 PM\n• Walk-ins welcome when available\n• Appointments recommended\n\nBook online or call us at +66 2 123 4567!',
+    answer: `🕐 **Studio Hours**\n\n• Daily: ${STUDIO.hours}\n• Walk-ins welcome when available\n• Appointments recommended\n\nBook online or call us at ${STUDIO.phone}!`,
   },
   location: {
-    keywords: ['location', 'where', 'address', 'direction', 'parking', 'bts', 'mrt', 'find', 'bangkok', 'sukhumvit'],
-    answer: '📍 **Location**\n\n123 Sukhumvit Road, Soi 11\nKhlong Toei, Bangkok 10110\n\n🚇 5 min walk from Nana BTS Station\n🚗 Street parking available\n\nWe\'re on the 2nd floor, look for the red neon sign!',
+    keywords: ['location', 'where', 'address', 'direction', 'parking', 'bts', 'mrt', 'find', 'chiang mai', 'thailand'],
+    answer: `📍 **Location**\n\n${STUDIO.address}\n\n📍 ${STUDIO.addressShort}\n\nWe're easy to find — look for the red neon sign!`,
   },
   deposit: {
     keywords: ['deposit', 'payment', 'pay', 'card', 'cash', 'transfer', 'promptpay', 'refund', 'cancel'],
-    answer: '💳 **Payment & Deposits**\n\n• 500 THB non-refundable deposit to book\n• Deposit goes toward your final price\n• We accept: Cash, PromptPay, Credit/Debit Cards\n• Full payment due at end of session\n• Cancellations: 24h notice required to reschedule',
+    answer: '💳 **Payment & Deposits**\n\n• 500 THB non-refundable deposit to book\n• Deposit goes toward your final price\n• We accept: Cash (pay at studio), PromptPay, Credit/Debit Cards\n• Full payment due at end of session\n• Cancellations: 24h notice required to reschedule',
   },
   pain: {
     keywords: ['pain', 'hurt', 'painful', 'ouch', 'tolerate', 'scared', 'afraid', 'first time'],
@@ -36,7 +37,7 @@ function getResponse(input) {
       return category.answer
     }
   }
-  return "Thanks for your message! 😊 For detailed inquiries, please call us at **+66 2 123 4567** or email **hello@earthgangtattoo.com**. You can also check our [FAQ page](/faq) for more answers!\n\nAsk me about: pricing, aftercare, hours, location, deposits, or pain levels."
+  return `Thanks for your message! 😊 For detailed inquiries, please call us at **${STUDIO.phone}** or email **${STUDIO.email}**. You can also check our [FAQ page](/faq) for more answers!\n\nAsk me about: pricing, aftercare, hours, location, deposits, or pain levels.`
 }
 
 const formatMessage = (text) => {

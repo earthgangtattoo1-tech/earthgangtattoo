@@ -5,54 +5,45 @@
 // All pages read from this file — edit once, done.
 // ============================================
 
+export const STUDIO = {
+  name: 'Earth Gang Tattoo',
+  address: '141/3 ถ.กำแพงดิน ต.หายยา อ.เมือง จ.เชียงใหม่ 50100',
+  addressShort: 'Chiang Mai, Thailand',
+  phone: '064-639-4795',
+  phoneRaw: '0646394795',
+  email: 'earthgangtattoo@gmail.com',
+  hours: '10:00 AM - 10:00 PM',
+  hoursNote: 'Open Daily',
+  deposit: 500,
+  currency: 'THB',
+  ceo: 'Nont',
+  promptpayId: 'Panyanon Viradecha',
+  promptpayPhone: '0646394795',
+  promptpayQr: '00020101021226210014COM.GOOGLE.PAY01130066646394795021Panyanon Viradecha5204581353037645405300.006304',
+  artists: [
+    { id: 'toon', name: 'TOON', specialty: 'Fine Line & Realism', gradient: 'from-rose-900/40 to-pink-900/20', initials: 'T', description: 'Known for incredibly delicate fine line work and photorealistic portraits with surgical precision.' },
+    { id: 'roonie', name: 'Roonie', specialty: 'Traditional & Neo-Traditional', gradient: 'from-red-900/40 to-orange-900/20', initials: 'R', description: 'Brings bold, vibrant traditional tattoos to life with neo-traditional flair and masterful color work.' },
+  ],
+}
+
 const config = {
   // --- Studio Info ---
   studio: {
-    name: "Earth Gang Tattoo",
-    tagline: "Bangkok's Premier Tattoo Studio",
+    name: STUDIO.name,
+    tagline: "Chiang Mai's Premier Tattoo Studio",
     description: "Where art meets innovation",
-    phone: "+66 2 123 4567",
-    email: "hello@earthgangtattoo.com",
-    address: "123 Sukhumvit Road, Soi 11\nKhlong Toei, Bangkok 10110",
-    bts: "5 min walk from Nana BTS Station",
-    hours: [
-      { day: "Mon - Fri", time: "11:00 AM - 9:00 PM" },
-      { day: "Sat - Sun", time: "10:00 AM - 10:00 PM" },
-    ],
+    phone: STUDIO.phone,
+    email: STUDIO.email,
+    address: STUDIO.address,
+    hours: STUDIO.hours,
+    hoursNote: STUDIO.hoursNote,
+    ceo: STUDIO.ceo,
   },
 
   // ============================================
   // 👤 ARTISTS — Change names, styles, colors here
   // ============================================
-  artists: [
-    {
-      id: "aom",                   // internal id (lowercase, no spaces)
-      name: "Aom",                 // ← Artist display name
-      specialty: "Fine Line & Realism",
-      description:
-        "Known for incredibly delicate fine line work and photorealistic portraits that capture every detail with surgical precision.",
-      gradient: "from-rose-900/40 to-pink-900/20",   // card background gradient
-      initials: "A",                                // letter shown on card
-    },
-    {
-      id: "kai",
-      name: "Kai",
-      specialty: "Traditional & Neo-Traditional",
-      description:
-        "Brings bold, vibrant traditional tattoos into the modern era with neo-traditional flair and masterful color work.",
-      gradient: "from-red-900/40 to-orange-900/20",
-      initials: "K",
-    },
-    {
-      id: "mink",
-      name: "Mink",
-      specialty: "Watercolor & Illustrative",
-      description:
-        "Creates breathtaking watercolor tattoos that flow like liquid art on skin, blending colors in ways that seem almost magical.",
-      gradient: "from-violet-900/40 to-blue-900/20",
-      initials: "M",
-    },
-  ],
+  artists: STUDIO.artists,
 
   // ============================================
   // 💰 SERVICES & PRICING
@@ -66,7 +57,7 @@ const config = {
     { name: "Touch-Up", size: "Existing work", price: "From 500 THB", icon: "✅", value: "touchup", priceNum: 500 },
   ],
 
-  deposit: 500, // THB — booking deposit amount
+  deposit: STUDIO.deposit, // THB — booking deposit amount
 
   // ============================================
   // ⭐ TESTIMONIALS
@@ -81,13 +72,13 @@ const config = {
     {
       name: "James L.",
       location: "United Kingdom",
-      text: "An amazing neo-traditional piece on my forearm. The studio is spotless, the vibe is great, and the attention to detail is next level. Best tattoo experience in Bangkok, hands down.",
+      text: "An amazing neo-traditional piece on my forearm. The studio is spotless, the vibe is great, and the attention to detail is next level. Best tattoo experience in Chiang Mai, hands down.",
       rating: 5,
     },
     {
       name: "Yuki T.",
       location: "Japan",
-      text: "The watercolor work is absolutely stunning. My vague idea was turned into something far beyond my expectations. The AI consultation feature helped me nail down the design before I even arrived!",
+      text: "The work is absolutely stunning. My vague idea was turned into something far beyond my expectations. The AI consultation feature helped me nail down the design before I even arrived!",
       rating: 5,
     },
   ],
@@ -96,26 +87,23 @@ const config = {
   // 🖼️ GALLERY ITEMS
   // ============================================
   galleryCategories: [
-    "All", "Fine Line", "Traditional", "Watercolor", "Realism",
-    "Neo-Traditional", "Geometric", "Illustrative", "Japanese",
+    "All", "Fine Line", "Traditional", "Realism",
+    "Neo-Traditional", "Geometric", "Japanese",
   ],
 
   galleryItems: [
-    { category: "Fine Line", label: "Delicate Rose", gradient: "from-rose-900/60 to-pink-800/30", size: "small" },
-    { category: "Traditional", label: "Classic Anchor", gradient: "from-red-900/60 to-orange-800/30", size: "small" },
-    { category: "Watercolor", label: "Abstract Wave", gradient: "from-blue-900/60 to-cyan-800/30", size: "large" },
-    { category: "Realism", label: "Portrait Study", gradient: "from-gray-800/60 to-gray-700/30", size: "small" },
-    { category: "Neo-Traditional", label: "Tiger Flash", gradient: "from-amber-900/60 to-yellow-800/30", size: "small" },
-    { category: "Fine Line", label: "Butterfly Wing", gradient: "from-violet-900/60 to-purple-800/30", size: "small" },
-    { category: "Geometric", label: "Sacred Geometry", gradient: "from-teal-900/60 to-emerald-800/30", size: "large" },
-    { category: "Japanese", label: "Koi Dragon", gradient: "from-sky-900/60 to-blue-800/30", size: "small" },
-    { category: "Watercolor", label: "Galaxy Sleeve", gradient: "from-indigo-900/60 to-violet-800/30", size: "small" },
-    { category: "Illustrative", label: "Storybook Scene", gradient: "from-fuchsia-900/60 to-pink-800/30", size: "small" },
-    { category: "Traditional", label: "Dagger & Heart", gradient: "from-red-900/60 to-rose-800/30", size: "small" },
-    { category: "Realism", label: "Cherry Blossom", gradient: "from-pink-900/60 to-rose-800/30", size: "large" },
-    { category: "Fine Line", label: "Moon Phase", gradient: "from-slate-800/60 to-zinc-700/30", size: "small" },
-    { category: "Neo-Traditional", label: "Snake & Rose", gradient: "from-green-900/60 to-lime-800/30", size: "small" },
-    { category: "Japanese", label: "Cherry Wave", gradient: "from-sky-900/60 to-indigo-800/30", size: "small" },
+    { category: "Fine Line", label: "Delicate Rose", image: "https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=400&h=400&fit=crop", size: "small" },
+    { category: "Traditional", label: "Classic Anchor", image: "https://images.unsplash.com/photo-1590246815117-c0728ef83a4b?w=400&h=400&fit=crop", size: "small" },
+    { category: "Realism", label: "Portrait Study", image: "https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?w=400&h=400&fit=crop", size: "large" },
+    { category: "Neo-Traditional", label: "Tiger Flash", image: "https://images.unsplash.com/photo-1542556398-95fb5b9f9309?w=400&h=400&fit=crop", size: "small" },
+    { category: "Fine Line", label: "Butterfly Wing", image: "https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=500&h=500&fit=crop", size: "small" },
+    { category: "Geometric", label: "Sacred Geometry", image: "https://images.unsplash.com/photo-1590246815117-c0728ef83a4b?w=500&h=500&fit=crop", size: "large" },
+    { category: "Japanese", label: "Koi Dragon", image: "https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?w=500&h=500&fit=crop", size: "small" },
+    { category: "Neo-Traditional", label: "Snake & Rose", image: "https://images.unsplash.com/photo-1542556398-95fb5b9f9309?w=500&h=500&fit=crop", size: "small" },
+    { category: "Traditional", label: "Dagger & Heart", image: "https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=600&h=600&fit=crop", size: "small" },
+    { category: "Realism", label: "Cherry Blossom", image: "https://images.unsplash.com/photo-1590246815117-c0728ef83a4b?w=600&h=600&fit=crop", size: "large" },
+    { category: "Fine Line", label: "Moon Phase", image: "https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?w=600&h=600&fit=crop", size: "small" },
+    { category: "Japanese", label: "Cherry Wave", image: "https://images.unsplash.com/photo-1542556398-95fb5b9f9309?w=600&h=600&fit=crop", size: "small" },
   ],
 }
 

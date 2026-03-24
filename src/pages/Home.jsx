@@ -3,9 +3,9 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import {
   ChevronRight, Star, Clock, Shield,
-  Flame, ArrowRight, Sparkles
+  Flame, ArrowRight, Sparkles, Crown
 } from 'lucide-react'
-import config from '../config'
+import config, { STUDIO } from '../config'
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -144,6 +144,51 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* ===== CEO / FOUNDER ===== */}
+      <Section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <motion.p variants={fadeInUp} custom={0} className="text-gold text-sm font-semibold uppercase tracking-widest mb-3">
+            Founder & CEO
+          </motion.p>
+          <motion.h2 variants={fadeInUp} custom={1} className="text-4xl sm:text-5xl font-bold text-white">
+            Meet {STUDIO.ceo}
+          </motion.h2>
+          <motion.p variants={fadeInUp} custom={2} className="text-gray-500 mt-4 max-w-2xl mx-auto">
+            The visionary behind Earth Gang Tattoo, dedicated to bringing world-class tattoo artistry to Chiang Mai.
+          </motion.p>
+        </div>
+
+        <motion.div
+          variants={fadeInUp}
+          custom={3}
+          whileHover={{ y: -8, transition: { duration: 0.3 } }}
+          className="max-w-2xl mx-auto group relative rounded-2xl overflow-hidden border border-white/5 hover:border-white/10 transition-all duration-500"
+          style={{ background: 'linear-gradient(135deg, #111111 0%, #1a1a1a 100%)' }}
+        >
+          <div className="aspect-[4/3] bg-gradient-to-br from-gold/20 to-amber-900/10 relative overflow-hidden">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Crown className="w-24 h-24 text-gold/20 group-hover:text-gold/30 transition-colors duration-500" />
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#111111] to-transparent" />
+          </div>
+
+          <div className="p-8 -mt-8 relative text-center">
+            <h3 className="text-2xl font-bold text-white">{STUDIO.ceo}</h3>
+            <p className="text-gold text-sm font-medium mt-1">Founder & CEO</p>
+            <p className="text-gray-500 text-sm mt-3 leading-relaxed">
+              With over a decade of experience in the tattoo industry, {STUDIO.ceo} founded Earth Gang Tattoo
+              to create a studio where artistry, hygiene, and client experience come first. Every artist on the team
+              has been personally selected for their exceptional skill and passion for the craft.
+            </p>
+            <div className="flex items-center justify-center gap-4 mt-6 text-gray-600 text-sm">
+              <span>{STUDIO.addressShort}</span>
+              <span className="w-1 h-1 bg-gray-700 rounded-full" />
+              <span>{STUDIO.hours}</span>
+            </div>
+          </div>
+        </motion.div>
+      </Section>
+
       {/* ===== ARTISTS ===== */}
       <Section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-16">
@@ -158,7 +203,7 @@ export default function Home() {
           </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {artists.map((artist, i) => (
             <motion.div
               key={artist.id}
