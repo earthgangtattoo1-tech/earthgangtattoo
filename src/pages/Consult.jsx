@@ -146,9 +146,9 @@ export default function Consult() {
   return (
     <>
       <SEO title="AI Tattoo Design Consultation" description="Get instant AI-powered tattoo design advice from Earth Gang Tattoo Chiang Mai. Describe your idea and get expert recommendations for style, placement, sizing & pricing. Free consultation available." path="/consult" />
-      <div className="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen pt-32 pb-28 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <motion.div ref={ref} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="text-center mb-12">
+        <motion.div ref={ref} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="text-center mb-16">
           <motion.div custom={0} variants={fadeInUp}>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-red/10 border border-neon-red/20 mb-6">
               <Sparkles className="w-4 h-4 text-neon-red" />
@@ -158,12 +158,12 @@ export default function Consult() {
           <motion.h1 custom={1} variants={fadeInUp} className="text-4xl sm:text-5xl font-bold text-white">
             Design Consultation
           </motion.h1>
-          <motion.p custom={2} variants={fadeInUp} className="text-gray-500 mt-4 max-w-2xl mx-auto">
+          <motion.p custom={2} variants={fadeInUp} className="text-gray-500 mt-5 max-w-2xl mx-auto">
             Get instant design guidance from our AI consultation tool. Select a style or describe your dream tattoo and get expert recommendations.
           </motion.p>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="mb-8">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="mb-10">
           <p className="text-gray-400 text-sm mb-3 flex items-center gap-2">
             <Palette className="w-4 h-4" /> Quick style selection
           </p>
@@ -237,7 +237,7 @@ export default function Consult() {
                 </div>
               </div>
 
-              <div className="p-6 sm:p-8 rounded-2xl border border-white/5 bg-white/[0.02]">
+              <div className="p-8 sm:p-10 rounded-2xl border border-white/5 bg-white/[0.02]">
                 <div className="prose prose-invert prose-sm max-w-none text-gray-400 leading-relaxed">
                   {formatResult(result.description)}
                 </div>

@@ -130,7 +130,7 @@ function FAQItem({ question, answer }) {
     <div className="border border-white/5 rounded-xl overflow-hidden transition-colors hover:border-white/10">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-5 py-4 flex items-center justify-between text-left gap-4"
+        className="w-full px-6 py-5 flex items-center justify-between text-left gap-4"
       >
         <span className="text-white text-sm font-medium">{question}</span>
         {isOpen ? (
@@ -146,7 +146,7 @@ function FAQItem({ question, answer }) {
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.2 }}
         >
-          <div className="px-5 pb-4 text-gray-400 text-sm leading-relaxed whitespace-pre-line">
+          <div className="px-6 pb-5 text-gray-400 text-sm leading-relaxed whitespace-pre-line">
             {answer}
           </div>
         </motion.div>
@@ -176,10 +176,10 @@ export default function Faq() {
   return (
     <>
       <SEO title="FAQ — Tattoo Questions Answered" description="Frequently asked questions about Earth Gang Tattoo Chiang Mai. Pricing, aftercare, hours, location, deposits, artist specialties, and booking info. 064-639-4795." path="/faq" />
-      <div className="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen pt-32 pb-28 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <motion.div ref={ref} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="text-center mb-12">
+        <motion.div ref={ref} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="text-center mb-16">
           <motion.div custom={0} variants={fadeInUp}>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-red/10 border border-neon-red/20 mb-6">
               <MessageCircle className="w-4 h-4 text-neon-red" />
@@ -189,7 +189,7 @@ export default function Faq() {
           <motion.h1 custom={1} variants={fadeInUp} className="text-4xl sm:text-5xl font-bold text-white">
             Frequently Asked Questions
           </motion.h1>
-          <motion.p custom={2} variants={fadeInUp} className="text-gray-500 mt-4 max-w-2xl mx-auto">
+          <motion.p custom={2} variants={fadeInUp} className="text-gray-500 mt-5 max-w-2xl mx-auto">
             Find answers to common questions about our studio, pricing, aftercare, and more.
           </motion.p>
         </motion.div>
@@ -214,7 +214,7 @@ export default function Faq() {
         </motion.div>
 
         {/* Category filters */}
-        <div className="flex flex-wrap gap-2 mb-8">
+        <div className="flex flex-wrap gap-2 mb-10">
           {categories.map((cat) => (
             <button
               key={cat}
@@ -231,7 +231,7 @@ export default function Faq() {
         </div>
 
         {/* FAQ Sections */}
-        <div className="space-y-10">
+        <div className="space-y-14">
           {filteredFAQ.map((cat) => (
             <div key={cat.category}>
               <div className="flex items-center gap-3 mb-4">
@@ -261,16 +261,16 @@ export default function Faq() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="mt-16 grid sm:grid-cols-2 gap-4"
+          className="mt-20 grid sm:grid-cols-2 gap-6"
         >
-          <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02]">
-            <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
+          <div className="p-8 rounded-2xl border border-white/5 bg-white/[0.02]">
+            <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
               <Clock className="w-4 h-4 text-neon-red" /> Studio Hours
             </h3>
             <p className="text-gray-500 text-sm">{STUDIO.hoursNote}: {STUDIO.hours}</p>
           </div>
-          <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02]">
-            <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
+          <div className="p-8 rounded-2xl border border-white/5 bg-white/[0.02]">
+            <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
               <Phone className="w-4 h-4 text-neon-red" /> Contact Us
             </h3>
             <p className="text-gray-500 text-sm">
@@ -282,7 +282,7 @@ export default function Faq() {
         </motion.div>
 
         {/* CTA */}
-        <div className="mt-12 text-center">
+        <div className="mt-16 text-center">
           <p className="text-gray-500 text-sm mb-4">Still have questions? Chat with us instantly!</p>
           <Link
             to="/booking"

@@ -112,14 +112,14 @@ export default function Booking() {
   return (
     <>
       <SEO title="Book a Tattoo — Free Consultation Available" description="Book your tattoo session online at Earth Gang Tattoo Chiang Mai. Choose from TOON or Roonie, pick your date & time. Free 30-min consultation available. 500 THB deposit. Cash, PromptPay & Card accepted." path="/booking" />
-      <div className="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen pt-32 pb-28 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         {/* Progress */}
-        <div className="mb-12">
+        <div className="mb-16">
           <h1 className="text-3xl sm:text-4xl font-bold text-white text-center mb-2">
             {booking.isConsultation ? 'Book Free Consultation' : 'Book Your Session'}
           </h1>
-          <p className="text-gray-500 text-center mb-8">
+          <p className="text-gray-500 text-center mb-10">
             {booking.isConsultation
               ? 'Free 30-min consultation — no payment required'
               : `Secure your spot with a ${deposit} THB deposit`}
