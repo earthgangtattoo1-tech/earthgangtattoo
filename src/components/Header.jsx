@@ -53,12 +53,12 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-2">
+          <nav className="hidden md:flex items-center gap-5 ml-auto">
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-lg ${
+                className={`relative px-4 py-2 text-[15px] font-medium transition-colors duration-300 rounded-lg ${
                   location.pathname === link.to
                     ? 'text-neon-red'
                     : 'text-gray-400 hover:text-white'

@@ -39,7 +39,7 @@ export default function Home() {
 
   return (
     <>
-      <SEO title="Best Tattoo Studio in Chiang Mai" description="Earth Gang Tattoo — Chiang Mai's #1 tattoo studio. Fine Line, Realism & Traditional tattoos by TOON & Roonie. Book online, free consultation. 141/3 ถ.กำแพงดิน, Chiang Mai 50100." path="/" />
+      <SEO title="Best Tattoo Studio in Chiang Mai" description="Earth Gang Tattoo — Chiang Mai's #1 tattoo studio. Fine Line, Realism & Traditional tattoos by TOON & RONNIE. Book online, free consultation. 141/3 ถ.กำแพงดิน, Chiang Mai 50100." path="/" />
       <div className="overflow-hidden">
       {/* ===== HERO ===== */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -102,10 +102,10 @@ export default function Home() {
           >
             <Link
               to="/booking"
-              className="group inline-flex items-center gap-2 bg-neon-red hover:bg-neon-red-light text-white px-8 py-4 rounded-xl font-semibold text-base transition-all duration-300 shadow-lg shadow-neon-red/25 hover:shadow-neon-red/40 hover:gap-3"
+              className="group inline-flex items-center justify-center gap-2 bg-neon-red hover:bg-neon-red-light text-white px-8 py-4 rounded-xl font-semibold text-base transition-all duration-300 shadow-lg shadow-neon-red/25 hover:shadow-neon-red/40"
             >
-              Book Now
-              <ChevronRight className="w-4 h-4" />
+              <span className="text-center">Book Now</span>
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
             <Link
               to="/consult"
@@ -148,7 +148,7 @@ export default function Home() {
       </section>
 
       {/* ===== CEO / FOUNDER ===== */}
-      <Section className="py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <Section className="py-40 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <motion.p variants={fadeInUp} custom={0} className="text-gold text-sm font-semibold uppercase tracking-widest mb-4">
             Founder & CEO
@@ -164,27 +164,42 @@ export default function Home() {
         <motion.div
           variants={fadeInUp}
           custom={3}
-          whileHover={{ y: -8, transition: { duration: 0.3 } }}
-          className="max-w-2xl mx-auto group relative rounded-2xl overflow-hidden border border-white/5 hover:border-white/10 transition-all duration-500"
-          style={{ background: 'linear-gradient(135deg, #111111 0%, #1a1a1a 100%)' }}
+          className="flex flex-col md:flex-row items-center gap-12 md:gap-16 max-w-5xl mx-auto"
         >
-          <div className="aspect-[4/3] relative overflow-hidden">
-            <img src="/Non.jpg.jpg" alt="Nont - CEO & Founder" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-            <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#111111] to-transparent" />
-          </div>
-
-          <div className="p-8 -mt-8 relative text-center">
-            <h3 className="text-2xl font-bold text-white">{STUDIO.ceo}</h3>
-            <p className="text-gold text-sm font-medium mt-2">Founder & CEO</p>
-            <p className="text-gray-500 text-sm mt-4 leading-relaxed">
+          {/* Text left */}
+          <div className="flex-1 text-left">
+            <h3 className="text-3xl sm:text-4xl font-bold text-white">{STUDIO.ceo}</h3>
+            <p className="text-gold text-sm font-medium uppercase tracking-wider mt-3">Founder & CEO</p>
+            <p className="text-gray-400 text-sm mt-6 leading-relaxed max-w-md">
               With over a decade of experience in the tattoo industry, {STUDIO.ceo} founded Earth Gang Tattoo
               to create a studio where artistry, hygiene, and client experience come first. Every artist on the team
               has been personally selected for their exceptional skill and passion for the craft.
             </p>
-            <div className="flex items-center justify-center gap-4 mt-8 text-gray-600 text-sm">
-              <span>{STUDIO.addressShort}</span>
-              <span className="w-1 h-1 bg-gray-700 rounded-full" />
-              <span>{STUDIO.hours}</span>
+            <div className="flex items-center gap-4 mt-8 text-gray-500 text-sm">
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 bg-neon-red rounded-full" />
+                {STUDIO.addressShort}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 bg-gold rounded-full" />
+                {STUDIO.hours}
+              </span>
+            </div>
+          </div>
+
+          {/* Image right — medium size */}
+          <div className="w-full md:w-80 lg:w-96 shrink-0">
+            <div
+              className="relative rounded-2xl overflow-hidden border border-white/5"
+              style={{ background: 'linear-gradient(135deg, #111111 0%, #1a1a1a 100%)' }}
+            >
+              <div className="aspect-[4/5] relative overflow-hidden">
+                <img
+                  src="/Non.jpg.jpg"
+                  alt={`${STUDIO.ceo} - CEO & Founder`}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
             </div>
           </div>
         </motion.div>
@@ -196,8 +211,8 @@ export default function Home() {
       </div>
 
       {/* ===== ARTISTS ===== */}
-      <Section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+      <Section className="py-40 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="text-center mb-20">
           <motion.p variants={fadeInUp} custom={0} className="text-neon-red text-sm font-semibold uppercase tracking-widest mb-4">
             Our Artists
           </motion.p>
@@ -246,7 +261,7 @@ export default function Home() {
       </Section>
 
       {/* ===== SERVICES ===== */}
-      <Section className="py-36 px-4 sm:px-6 lg:px-8 relative">
+      <Section className="py-44 px-4 sm:px-6 lg:px-8 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neon-red/[0.03] to-transparent" />
         <div className="max-w-6xl mx-auto relative">
           <div className="text-center mb-20">
@@ -284,7 +299,7 @@ export default function Home() {
       </Section>
 
       {/* ===== TESTIMONIALS ===== */}
-      <Section className="py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <Section className="py-44 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <motion.p variants={fadeInUp} custom={0} className="text-gold text-sm font-semibold uppercase tracking-widest mb-4">
             Testimonials
@@ -323,7 +338,7 @@ export default function Home() {
       </Section>
 
       {/* ===== CTA ===== */}
-      <Section className="py-36 px-4 sm:px-6 lg:px-8">
+      <Section className="py-44 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             variants={fadeInUp}
@@ -345,17 +360,17 @@ export default function Home() {
               <motion.div variants={fadeInUp} custom={2} className="mt-10 flex flex-col sm:flex-row gap-5 justify-center">
                 <Link
                   to="/booking"
-                  className="group inline-flex items-center gap-2 bg-neon-red hover:bg-neon-red-light text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg shadow-neon-red/25 hover:shadow-neon-red/40"
+                  className="group inline-flex items-center justify-center gap-2 bg-neon-red hover:bg-neon-red-light text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg shadow-neon-red/25 hover:shadow-neon-red/40"
                 >
                   <Clock className="w-4 h-4" />
-                  Book Appointment
+                  <span>Book Appointment</span>
                 </Link>
                 <Link
                   to="/consult"
-                  className="group inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white border border-white/10 px-8 py-4 rounded-xl font-semibold transition-all duration-300"
+                  className="group inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white border border-white/10 px-8 py-4 rounded-xl font-semibold transition-all duration-300"
                 >
                   <Sparkles className="w-4 h-4 text-gold" />
-                  Try AI Consultation
+                  <span>Try AI Consultation</span>
                 </Link>
               </motion.div>
             </div>

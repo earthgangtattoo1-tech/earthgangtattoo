@@ -87,7 +87,7 @@ const faqData = [
     questions: [
       {
         q: 'Who are your artists and what are their specialties?',
-        a: 'We have two incredible artists:\n• TOON — Fine Line & Realism: Delicate, precise work with photorealistic detail\n• Roonie — Traditional & Neo-Traditional: Bold, vibrant pieces with masterful color work',
+        a: 'We have two incredible artists:\n• TOON — Traditional · Japanese · Thai · Color · Animals · Largescale\n• RONNIE — Blackwork · Fineline · Anime · Font · Geometric · Minimal · Cybersigilism',
       },
       {
         q: 'Can I bring my own design?',

@@ -21,8 +21,8 @@ export const STUDIO = {
   promptpayPhone: '0646394795',
   promptpayQr: '00020101021226210014COM.GOOGLE.PAY01130066646394795021Panyanon Viradecha5204581353037645405300.006304',
   artists: [
-    { id: 'toon', name: 'TOON', specialty: 'Fine Line & Realism', gradient: 'from-rose-900/40 to-pink-900/20', initials: 'T', description: 'Known for incredibly delicate fine line work and photorealistic portraits with surgical precision.' },
-    { id: 'roonie', name: 'Roonie', specialty: 'Traditional & Neo-Traditional', gradient: 'from-red-900/40 to-orange-900/20', initials: 'R', description: 'Brings bold, vibrant traditional tattoos to life with neo-traditional flair and masterful color work.' },
+    { id: 'toon', name: 'TOON', specialty: 'TRADITIONAL · JAPANESE · THAI · COLOR · ANIMALS · LARGESCALE', gradient: 'from-rose-900/40 to-pink-900/20', initials: 'T', description: 'Known for bold traditional work, Japanese Irezumi, Thai-inspired designs, vibrant color work, and large-scale pieces with meticulous detail.' },
+    { id: 'ronnie', name: 'RONNIE', specialty: 'BLACKWORK · FINELINE · ANIME · FONT · GEOMETRIC · MINIMAL · CYBERSIGILISM', gradient: 'from-red-900/40 to-orange-900/20', initials: 'R', description: 'Specializes in precise blackwork, delicate fineline, anime illustrations, custom typography, geometric patterns, minimal designs, and cutting-edge cybersigilism.' },
   ],
 }
 

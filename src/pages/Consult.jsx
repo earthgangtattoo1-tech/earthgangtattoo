@@ -39,44 +39,44 @@ const quickPrompts = [
 function generateConsultation(prompt) {
   const consultations = {
     'fine line': {
-      artist: findArtist(['fine line']),
+      artist: findArtist(['fineline']),
       style: 'Fine Line',
-      description: `Based on your interest in a **fine line** design, our artist **TOON** specializing in fine line work would be perfect for this piece. Fine line work requires exceptional precision and a steady hand.\n\n**Design Recommendations:**\n• Fine line work looks best at **small to medium sizes** (2-5 inches)\n• **Ideal placements**: Inner forearm, behind the ear, collarbone, ankle, or ribcage\n• Fine lines heal beautifully but require careful aftercare\n\n**Session Details:**\n• **Estimated time**: 2-3 hours for most fine line pieces\n• **Pricing**: Starting from 3,000 THB depending on complexity\n• **Sessions needed**: Usually 1 session for smaller pieces`,
+      description: `Based on your interest in a **fine line** design, our artist **RONNIE** would be perfect for this piece. Fine line work requires exceptional precision and a steady hand.\n\n**Design Recommendations:**\n• Fine line work looks best at **small to medium sizes** (2-5 inches)\n• **Ideal placements**: Inner forearm, behind the ear, collarbone, ankle, or ribcage\n• Fine lines heal beautifully but require careful aftercare\n\n**Session Details:**\n• **Estimated time**: 2-3 hours for most fine line pieces\n• **Pricing**: Starting from 3,000 THB depending on complexity\n• **Sessions needed**: Usually 1 session for smaller pieces`,
     },
     'traditional': {
       artist: findArtist(['traditional']),
-      style: 'Traditional / Neo-Traditional',
-      description: `A **traditional** piece is a timeless choice! Our artist **Roonie** specializes in both classic traditional and the more modern neo-traditional style.\n\n**Design Recommendations:**\n• Traditional tattoos feature **bold outlines and limited color palettes**\n• Neo-traditional adds more **dimension, detail, and color gradients**\n• **Ideal placements**: Upper arm, thigh, back, or chest for maximum impact\n• Bold designs age beautifully over time\n\n**Session Details:**\n• **Estimated time**: 3-5 hours for a medium piece\n• **Pricing**: Starting from 5,000 THB\n• **Sessions needed**: 1-2 sessions for most designs`,
+      style: 'Traditional / Japanese',
+      description: `A **traditional** piece is a timeless choice! Our artist **TOON** specializes in traditional, Japanese, Thai-inspired, and large-scale work.\n\n**Design Recommendations:**\n• Traditional tattoos feature **bold outlines and rich color palettes**\n• Japanese pieces work great as **large-scale work** (sleeves, back pieces)\n• **Ideal placements**: Upper arm, thigh, back, or chest for maximum impact\n• Bold designs age beautifully over time\n\n**Session Details:**\n• **Estimated time**: 3-5 hours for a medium piece\n• **Pricing**: Starting from 5,000 THB\n• **Sessions needed**: 1-2 sessions for most designs`,
     },
     'watercolor': {
-      artist: findArtist(['traditional', 'fine line']),
+      artist: findArtist(['fineline']),
       style: 'Watercolor',
-      description: `A **watercolor** tattoo is a stunning, artistic choice! Our artists can create pieces that look like they're flowing with liquid color on your skin.\n\n**Design Recommendations:**\n• Watercolor pieces need **enough space to breathe** — minimum 4 inches recommended\n• Works beautifully with **no black outline** for that authentic painted look\n• **Ideal placements**: Forearm, shoulder blade, thigh, or calf\n• Combines well with fine line accents\n\n**Session Details:**\n• **Estimated time**: 3-6 hours depending on size\n• **Pricing**: Starting from 6,000 THB\n• **Sessions needed**: Often 1-2 sessions`,
+      description: `A **watercolor** tattoo is a stunning, artistic choice! Our artist **RONNIE** can create pieces that look like they're flowing with liquid color on your skin.\n\n**Design Recommendations:**\n• Watercolor pieces need **enough space to breathe** — minimum 4 inches recommended\n• Works beautifully with **no black outline** for that authentic painted look\n• **Ideal placements**: Forearm, shoulder blade, thigh, or calf\n• Combines well with fine line accents\n\n**Session Details:**\n• **Estimated time**: 3-6 hours depending on size\n• **Pricing**: Starting from 6,000 THB\n• **Sessions needed**: Often 1-2 sessions`,
     },
     'geometric': {
-      artist: findArtist(['fine line', 'traditional']),
+      artist: findArtist(['geometric', 'fineline']),
       style: 'Geometric',
-      description: `**Geometric** tattoos are incredibly popular and visually striking. Our artists can create everything from simple geometric shapes to complex sacred geometry patterns.\n\n**Design Recommendations:**\n• Precision is key — geometric designs require **clean, mathematically precise lines**\n• Can range from minimal single shapes to **full mandala sleeves**\n• **Ideal placements**: Forearm (geometric bands), back (large mandalas), chest\n• Dotwork shading adds incredible depth\n\n**Session Details:**\n• **Estimated time**: 3-8 hours depending on complexity\n• **Pricing**: Starting from 4,000 THB (simple) to 25,000+ THB (sleeve)\n• **Sessions needed**: 1-3 sessions for complex pieces`,
+      description: `**Geometric** tattoos are incredibly popular and visually striking. Our artist **RONNIE** can create everything from simple geometric shapes to complex sacred geometry patterns.\n\n**Design Recommendations:**\n• Precision is key — geometric designs require **clean, mathematically precise lines**\n• Can range from minimal single shapes to **full mandala sleeves**\n• **Ideal placements**: Forearm (geometric bands), back (large mandalas), chest\n• Dotwork shading adds incredible depth\n\n**Session Details:**\n• **Estimated time**: 3-8 hours depending on complexity\n• **Pricing**: Starting from 4,000 THB (simple) to 25,000+ THB (sleeve)\n• **Sessions needed**: 1-3 sessions for complex pieces`,
     },
     'script': {
-      artist: findArtist(['fine line', 'realism']),
+      artist: findArtist(['font']),
       style: 'Script / Lettering',
-      description: `**Script and lettering** tattoos are deeply personal. Our artist **TOON** has a talent for creating elegant, custom typography that flows beautifully on the skin.\n\n**Design Recommendations:**\n• Script works at almost **any size** but needs enough space to be readable\n• **Ideal placements**: Inner arm, ribs, collarbone, along the spine, or foot\n• We can work with custom fonts or design lettering from scratch\n• Consider adding a small decorative element (flourish, date, etc.)\n\n**Session Details:**\n• **Estimated time**: 1-2 hours for most script pieces\n• **Pricing**: Starting from 2,000 THB\n• **Sessions needed**: Usually 1 session`,
+      description: `**Script and lettering** tattoos are deeply personal. Our artist **RONNIE** has a talent for creating elegant, custom typography that flows beautifully on the skin.\n\n**Design Recommendations:**\n• Script works at almost **any size** but needs enough space to be readable\n• **Ideal placements**: Inner arm, ribs, collarbone, along the spine, or foot\n• We can work with custom fonts or design lettering from scratch\n• Consider adding a small decorative element (flourish, date, etc.)\n\n**Session Details:**\n• **Estimated time**: 1-2 hours for most script pieces\n• **Pricing**: Starting from 2,000 THB\n• **Sessions needed**: Usually 1 session`,
     },
     'realism': {
-      artist: findArtist(['realism']),
+      artist: findArtist(['traditional']),
       style: 'Photorealism',
-      description: `**Photorealistic** tattoos are the pinnacle of tattoo artistry. Our artist **TOON** creates incredibly detailed, lifelike portraits and scenes.\n\n**Design Recommendations:**\n• Realism requires a **reference photo** for best results\n• **Minimum size**: 4 inches — smaller pieces lose detail over time\n• **Ideal placements**: Upper arm, thigh, back, or chest (flat surfaces work best)\n• Black & grey realism tends to age better than full color\n\n**Session Details:**\n• **Estimated time**: 4-8+ hours depending on complexity\n• **Pricing**: Starting from 8,000 THB\n• **Sessions needed**: 2-4 sessions for detailed portraits`,
+      description: `**Realism** tattoos are the pinnacle of tattoo artistry. Our artist **TOON** creates detailed, bold pieces with rich color and animal designs.\n\n**Design Recommendations:**\n• Realism requires a **reference photo** for best results\n• **Minimum size**: 4 inches — smaller pieces lose detail over time\n• **Ideal placements**: Upper arm, thigh, back, or chest (flat surfaces work best)\n• Bold color realism tends to age well\n\n**Session Details:**\n• **Estimated time**: 4-8+ hours depending on complexity\n• **Pricing**: Starting from 8,000 THB\n• **Sessions needed**: 2-4 sessions for detailed pieces`,
     },
     'japanese': {
-      artist: findArtist(['traditional', 'neo']),
+      artist: findArtist(['japanese', 'traditional']),
       style: 'Japanese / Irezumi',
-      description: `**Japanese tattoo art** (Irezumi) has a rich history spanning centuries. Our artist **Roonie** creates stunning Japanese-inspired pieces with bold imagery.\n\n**Design Recommendations:**\n• Classic motifs include **koi fish, dragons, cherry blossoms, waves, and tigers**\n• Japanese pieces work exceptionally well as **large-scale work** (sleeves, back pieces)\n• Bold outlines with vibrant color fill\n• **Ideal placements**: Full sleeve, back panel, thigh, or chest\n\n**Session Details:**\n• **Estimated time**: 5-10+ hours for large pieces\n• **Pricing**: Starting from 10,000 THB\n• **Sessions needed**: 3-6 sessions for a full sleeve`,
+      description: `**Japanese tattoo art** (Irezumi) has a rich history spanning centuries. Our artist **TOON** creates stunning Japanese-inspired pieces with bold imagery.\n\n**Design Recommendations:**\n• Classic motifs include **koi fish, dragons, cherry blossoms, waves, and tigers**\n• Japanese pieces work exceptionally well as **large-scale work** (sleeves, back pieces)\n• Bold outlines with vibrant color fill\n• **Ideal placements**: Full sleeve, back panel, thigh, or chest\n\n**Session Details:**\n• **Estimated time**: 5-10+ hours for large pieces\n• **Pricing**: Starting from 10,000 THB\n• **Sessions needed**: 3-6 sessions for a full sleeve`,
     },
     'minimalist': {
-      artist: findArtist(['fine line']),
+      artist: findArtist(['minimal', 'fineline']),
       style: 'Minimalist',
-      description: `**Minimalist** tattoos are clean, subtle, and incredibly popular in 2026. Our artist **TOON** excels at creating simple yet powerful designs.\n\n**Design Recommendations:**\n• Less is more — **simple shapes, thin lines, and negative space**\n• Perfect for first-time tattoo clients\n• **Ideal placements**: Wrist, ankle, behind ear, finger, or collarbone\n• Works in black ink or can incorporate subtle color\n\n**Session Details:**\n• **Estimated time**: 30 min - 1.5 hours\n• **Pricing**: Starting from 1,500 THB\n• **Sessions needed**: Usually 1 session`,
+      description: `**Minimalist** tattoos are clean, subtle, and incredibly popular. Our artist **RONNIE** excels at creating simple yet powerful designs.\n\n**Design Recommendations:**\n• Less is more — **simple shapes, thin lines, and negative space**\n• Perfect for first-time tattoo clients\n• **Ideal placements**: Wrist, ankle, behind ear, finger, or collarbone\n• Works in black ink or can incorporate subtle color\n\n**Session Details:**\n• **Estimated time**: 30 min - 1.5 hours\n• **Pricing**: Starting from 1,500 THB\n• **Sessions needed**: Usually 1 session`,
     },
   }
 
@@ -90,7 +90,7 @@ function generateConsultation(prompt) {
   return {
     artist: 'Our Team',
     style: 'Custom Design',
-    description: `Thank you for your interest in a custom tattoo design! Based on your idea of a "${prompt}", our team would love to bring this vision to life.\n\n**Our Recommendation:**\n• We'd suggest scheduling an **in-person or video consultation** to discuss your design in detail\n• Bring any **reference images** that inspire you\n• Consider the **placement and sizing** carefully — we can advise on what works best\n\n**Next Steps:**\n1. Book a consultation through our booking page\n2. Our artist will create a **custom sketch** based on your idea\n3. We'll review and refine the design together\n4. Schedule your tattoo session once you're happy with the design\n\n**General Pricing:**\n• Custom designs start from 3,000 THB\n• Complex pieces: 8,000 - 30,000+ THB\n• Hourly rate available for ongoing work\n\nFeel free to book a session and mention this consultation — our artists TOON and Roonie will be ready to discuss your design!`,
+    description: `Thank you for your interest in a custom tattoo design! Based on your idea of a "${prompt}", our team would love to bring this vision to life.\n\n**Our Recommendation:**\n• We'd suggest scheduling an **in-person or video consultation** to discuss your design in detail\n• Bring any **reference images** that inspire you\n• Consider the **placement and sizing** carefully — we can advise on what works best\n\n**Next Steps:**\n1. Book a consultation through our booking page\n2. Our artist will create a **custom sketch** based on your idea\n3. We'll review and refine the design together\n4. Schedule your tattoo session once you're happy with the design\n\n**General Pricing:**\n• Custom designs start from 3,000 THB\n• Complex pieces: 8,000 - 30,000+ THB\n• Hourly rate available for ongoing work\n\nFeel free to book a session and mention this consultation — our artists TOON and RONNIE will be ready to discuss your design!`,
   }
 }
 
@@ -256,7 +256,7 @@ export default function Consult() {
         </AnimatePresence>
 
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="text-gray-700 text-xs text-center mt-12">
-          AI consultations provide general guidance. For detailed designs, we recommend an in-person consultation with our artists TOON and Roonie.
+          AI consultations provide general guidance. For detailed designs, we recommend an in-person consultation with our artists TOON and RONNIE.
         </motion.p>
       </div>
     </div>
