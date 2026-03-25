@@ -148,8 +148,8 @@ export default function Home() {
       </section>
 
       {/* ===== CEO / FOUNDER ===== */}
-      <Section className="py-40 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="text-center mb-20">
+      <Section className="py-24 md:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="text-center mb-16">
           <motion.p variants={fadeInUp} custom={0} className="text-gold text-sm font-semibold uppercase tracking-widest mb-4">
             Founder & CEO
           </motion.p>
@@ -211,8 +211,8 @@ export default function Home() {
       </div>
 
       {/* ===== ARTISTS ===== */}
-      <Section className="py-40 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="text-center mb-20">
+      <Section className="py-24 md:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="text-center mb-16">
           <motion.p variants={fadeInUp} custom={0} className="text-neon-red text-sm font-semibold uppercase tracking-widest mb-4">
             Our Artists
           </motion.p>
@@ -260,11 +260,16 @@ export default function Home() {
         </div>
       </Section>
 
+      {/* Divider */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      </div>
+
       {/* ===== SERVICES ===== */}
-      <Section className="py-44 px-4 sm:px-6 lg:px-8 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neon-red/[0.03] to-transparent" />
+      <Section className="py-24 md:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neon-red/[0.03] to-transparent rounded-none" />
         <div className="max-w-6xl mx-auto relative">
-          <div className="text-center mb-20">
+          <div className="text-center mb-16">
             <motion.p variants={fadeInUp} custom={0} className="text-neon-red text-sm font-semibold uppercase tracking-widest mb-4">
               Services
             </motion.p>
@@ -298,8 +303,13 @@ export default function Home() {
         </div>
       </Section>
 
+      {/* Divider */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      </div>
+
       {/* ===== TESTIMONIALS ===== */}
-      <Section className="py-44 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <Section className="py-24 md:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <motion.p variants={fadeInUp} custom={0} className="text-gold text-sm font-semibold uppercase tracking-widest mb-4">
             Testimonials
@@ -337,8 +347,13 @@ export default function Home() {
         </div>
       </Section>
 
+      {/* Divider */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      </div>
+
       {/* ===== CTA ===== */}
-      <Section className="py-44 px-4 sm:px-6 lg:px-8">
+      <Section className="py-24 md:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             variants={fadeInUp}

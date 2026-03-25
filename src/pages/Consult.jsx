@@ -147,7 +147,7 @@ export default function Consult() {
   return (
     <>
       <SEO title="AI Tattoo Design Consultation" description="Get instant AI-powered tattoo design advice from Earth Gang Tattoo Chiang Mai. Describe your idea and get expert recommendations for style, placement, sizing & pricing. Free consultation available." path="/consult" />
-      <div className="min-h-screen pt-32 pb-28 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen pt-32 pb-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <motion.div ref={ref} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="text-center mb-16">
           <motion.div custom={0} variants={fadeInUp}>
@@ -164,7 +164,7 @@ export default function Consult() {
           </motion.p>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="mb-10">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="mb-12">
           <p className="text-gray-400 text-sm mb-3 flex items-center gap-2">
             <Palette className="w-4 h-4" /> Quick style selection
           </p>
@@ -185,7 +185,7 @@ export default function Consult() {
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="mb-8">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="mb-10">
           <p className="text-gray-400 text-sm mb-3 flex items-center gap-2">
             <MessageSquare className="w-4 h-4" /> Or describe your own idea
           </p>

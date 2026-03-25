@@ -177,7 +177,7 @@ export default function Faq() {
   return (
     <>
       <SEO title="FAQ — Tattoo Questions Answered" description="Frequently asked questions about Earth Gang Tattoo Chiang Mai. Pricing, aftercare, hours, location, deposits, artist specialties, and booking info. 064-639-4795." path="/faq" />
-      <div className="min-h-screen pt-32 pb-28 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen pt-32 pb-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div ref={ref} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="text-center mb-16">
@@ -200,7 +200,7 @@ export default function Faq() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="mb-6"
+          className="mb-8"
         >
           <div className="relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
