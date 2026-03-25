@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Sparkles, Send, Loader, RotateCcw, Palette, MessageSquare } from 'lucide-react'
 import config from '../config'
+import SEO from '../components/SEO'
 
 const { artists } = config
 

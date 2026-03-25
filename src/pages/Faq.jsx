@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronDown, ChevronUp, Search, ArrowRight, Clock, Shield, MessageCircle, CreditCard, MapPin, Phone, Mail, Heart } from 'lucide-react'
 import { STUDIO } from '../config'
+import SEO from '../components/SEO'
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },

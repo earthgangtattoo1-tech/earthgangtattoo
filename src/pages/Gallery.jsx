@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Search, ArrowRight, MapPin } from 'lucide-react'
 import config from '../config'
+import SEO from '../components/SEO'
 
 const { galleryCategories, galleryItems } = config
 

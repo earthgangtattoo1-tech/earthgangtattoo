@@ -66,7 +66,7 @@ export default function Booking() {
       hour: booking.time.hour,
       time: booking.time.label,
       artist: { name: booking.artist.name, id: booking.artist.id },
-      bookingType,
+      bookingType: booking.isConsultation ? 'consult' : 'session',
       reference: ref,
       createdAt: new Date().toISOString(),
     }
