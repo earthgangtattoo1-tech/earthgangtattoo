@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { Sparkles, Send, Loader, RotateCcw, Palette, MessageSquare } from 'lucide-react'
+import { motion, useInView } from 'framer-motion'
+import { Sparkles, Send, RotateCcw, Palette, MessageSquare } from 'lucide-react'
 import config from '../config'
 import SEO from '../components/SEO'
 
@@ -25,17 +25,9 @@ const quickPrompts = [
 ]
 
 // ============================================================
-// Mock AI consultation generator
-// In production, replace with a real Anthropic Claude API call:
-//
-//   import Anthropic from '@anthropic-ai/sdk'
-//   const anthropic = new Anthropic({ apiKey: import.meta.env.VITE_ANTHROPIC_API_KEY })
-//   const response = await anthropic.messages.create({
-//     model: 'claude-sonnet-4-20250514',
-//     max_tokens: 1024,
-//     messages: [{ role: 'user', content: `Tattoo consultation for: "${prompt}"` }]
-//   })
-//   return response.content[0].text
+// Curated Style Guide Generator
+// Provides expert tattoo style recommendations based on
+// our artists' specialties and studio experience.
 // ============================================================
 function generateConsultation(prompt) {
   const consultations = {
@@ -108,22 +100,13 @@ export default function Consult() {
   const [selectedPrompt, setSelectedPrompt] = useState('')
   const [customPrompt, setCustomPrompt] = useState('')
   const [result, setResult] = useState(null)
-  const [isGenerating, setIsGenerating] = useState(false)
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-50px' })
 
   const handleGenerate = () => {
     const prompt = selectedPrompt || customPrompt
     if (!prompt.trim()) return
-
-    setIsGenerating(true)
-    setResult(null)
-
-    setTimeout(() => {
-      const consultation = generateConsultation(prompt)
-      setResult(consultation)
-      setIsGenerating(false)
-    }, 1500 + Math.random() * 1000)
+    setResult(generateConsultation(prompt))
   }
 
   const handleReset = () => {
@@ -134,7 +117,7 @@ export default function Consult() {
 
   const formatResult = (text) => {
     return text.split('\n').map((line, i) => {
-      let processed = line.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')
+      let processed = line.replace(/\*\*(.*?)\*\*/g, '<strong class="text-cream">$1</strong>')
       processed = processed.replace(/"(.*?)"/g, '<em class="text-gold">"$1"</em>')
       return (
         <p key={i} className={line.trim() === '' ? 'h-2' : ''}>
@@ -146,37 +129,43 @@ export default function Consult() {
 
   return (
     <>
-      <SEO title="AI Tattoo Design Consultation" description="Get instant AI-powered tattoo design advice from Earth Gang Tattoo Chiang Mai. Describe your idea and get expert recommendations for style, placement, sizing & pricing. Free consultation available." path="/consult" />
-      <div className="min-h-screen pt-32 pb-32 px-4 sm:px-6 lg:px-8">
+      <SEO title="Tattoo Style Guide — Explore Styles" description="Explore tattoo styles and get expert recommendations from Earth Gang Tattoo Chiang Mai. Fine Line, Traditional, Japanese, Geometric and more. Curated by TOON & RONNIE." path="/consult" />
+      <div className="min-h-screen pt-32 pb-32 px-4 sm:px-6 lg:px-8 ink-wash">
       <div className="max-w-4xl mx-auto">
+
+        {/* ── Page Header ── */}
         <motion.div ref={ref} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="text-center mb-16">
           <motion.div custom={0} variants={fadeInUp}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-red/10 border border-neon-red/20 mb-6">
-              <Sparkles className="w-4 h-4 text-neon-red" />
-              <span className="text-neon-red text-sm font-medium">AI-Powered</span>
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-crimson/20 bg-crimson-glow mb-8">
+              <Sparkles className="w-3.5 h-3.5 text-crimson" />
+              <span className="label-mono text-crimson">Style Guide</span>
             </div>
           </motion.div>
-          <motion.h1 custom={1} variants={fadeInUp} className="text-4xl sm:text-5xl font-bold text-white">
+          <motion.h1 custom={1} variants={fadeInUp} className="heading-editorial text-4xl sm:text-5xl md:text-6xl text-cream mb-6">
             Design Consultation
           </motion.h1>
-          <motion.p custom={2} variants={fadeInUp} className="text-gray-500 mt-5 max-w-2xl mx-auto">
-            Get instant design guidance from our AI consultation tool. Select a style or describe your dream tattoo and get expert recommendations.
+          <motion.p custom={2} variants={fadeInUp} className="text-cream-muted text-lg max-w-2xl mx-auto leading-relaxed">
+            Explore our curated style guides and get expert recommendations for placement, sizing &amp; pricing — powered by our artists&apos; experience.
           </motion.p>
+          <motion.div custom={3} variants={fadeInUp} className="mt-8">
+            <div className="divider-ink max-w-xs mx-auto" />
+          </motion.div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="mb-12">
-          <p className="text-gray-400 text-sm mb-3 flex items-center gap-2">
-            <Palette className="w-4 h-4" /> Quick style selection
+        {/* ── Quick Style Selection Pills ── */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="mb-10">
+          <p className="label-mono text-cream-muted mb-4 flex items-center gap-2">
+            <Palette className="w-3.5 h-3.5 text-crimson" /> Quick style selection
           </p>
           <div className="flex flex-wrap gap-2">
             {quickPrompts.map((qp) => (
               <button
                 key={qp.label}
                 onClick={() => { setSelectedPrompt(qp.prompt); setCustomPrompt('') }}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
                   selectedPrompt === qp.prompt
-                    ? 'bg-neon-red text-white'
-                    : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/5'
+                    ? 'bg-crimson text-cream shadow-lg shadow-crimson/20'
+                    : 'bg-ink-card text-cream-muted border border-ink-border hover:border-ink-hover hover:text-cream-soft hover:bg-ink-elevated'
                 }`}
               >
                 {qp.label}
@@ -185,9 +174,10 @@ export default function Consult() {
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="mb-10">
-          <p className="text-gray-400 text-sm mb-3 flex items-center gap-2">
-            <MessageSquare className="w-4 h-4" /> Or describe your own idea
+        {/* ── Custom Prompt Input ── */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="mb-12">
+          <p className="label-mono text-cream-muted mb-4 flex items-center gap-2">
+            <MessageSquare className="w-3.5 h-3.5 text-crimson" /> Or describe your own idea
           </p>
           <div className="flex gap-3">
             <input
@@ -196,69 +186,65 @@ export default function Consult() {
               onChange={(e) => { setCustomPrompt(e.target.value); setSelectedPrompt('') }}
               onKeyDown={(e) => e.key === 'Enter' && handleGenerate()}
               placeholder="e.g., 'A minimalist mountain landscape with fine line detail'"
-              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-neon-red/50 transition-colors"
+              className="input-ink flex-1"
             />
             <button
               onClick={handleGenerate}
-              disabled={isGenerating || (!selectedPrompt && !customPrompt.trim())}
-              className="px-6 py-3 rounded-xl bg-neon-red hover:bg-neon-red-light text-white font-semibold disabled:opacity-30 disabled:hover:bg-neon-red transition-all flex items-center gap-2 shrink-0"
+              disabled={!selectedPrompt && !customPrompt.trim()}
+              className="btn-crimson shrink-0 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:transform-none"
             >
-              {isGenerating ? <Loader className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+              <Send className="w-4 h-4" />
               Generate
             </button>
           </div>
         </motion.div>
 
-        <AnimatePresence>
-          {isGenerating && (
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="text-center py-16">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <Loader className="w-5 h-5 text-neon-red animate-spin" />
-                <p className="text-gray-400">Generating your consultation...</p>
+        {/* ── Result Display ── */}
+        {result && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {/* Artist + Style Badges */}
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-crimson/25 bg-crimson-glow">
+                <Sparkles className="w-3.5 h-3.5 text-crimson" />
+                <span className="text-sm font-medium text-crimson">Recommended Artist: <span className="text-cream font-semibold">{result.artist}</span></span>
               </div>
-              <div className="flex justify-center gap-1.5">
-                {[0, 1, 2].map((i) => (
-                  <motion.div key={i} className="w-2 h-2 bg-neon-red/50 rounded-full"
-                    animate={{ y: [0, -8, 0], opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }}
-                  />
-                ))}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-ink-border bg-ink-card">
+                <Palette className="w-3.5 h-3.5 text-gold" />
+                <span className="text-sm text-cream-muted">{result.style}</span>
               </div>
-            </motion.div>
-          )}
+            </div>
 
-          {result && !isGenerating && (
-            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="px-3 py-1.5 rounded-full bg-neon-red/10 border border-neon-red/20">
-                  <span className="text-neon-red text-sm font-medium">Recommended Artist: {result.artist}</span>
-                </div>
-                <div className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
-                  <span className="text-gray-400 text-sm">{result.style}</span>
-                </div>
+            {/* Result Card */}
+            <div className="card-ink p-8 sm:p-10 [&:hover]:transform-none [&:hover]:translate-y-0">
+              <div className="text-cream-soft leading-relaxed space-y-1">
+                {formatResult(result.description)}
               </div>
+            </div>
 
-              <div className="p-8 sm:p-10 rounded-2xl border border-white/5 bg-white/[0.02]">
-                <div className="prose prose-invert prose-sm max-w-none text-gray-400 leading-relaxed">
-                  {formatResult(result.description)}
-                </div>
-              </div>
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 mt-8">
+              <button onClick={handleReset} className="btn-ghost flex-1">
+                <RotateCcw className="w-4 h-4" /> New Consultation
+              </button>
+              <a href="/booking" className="btn-crimson flex-[2]">
+                <Sparkles className="w-4 h-4" /> Book with {result.artist}
+              </a>
+            </div>
+          </motion.div>
+        )}
 
-              <div className="flex gap-3 mt-6">
-                <button onClick={handleReset} className="flex-1 py-3 rounded-xl border border-white/10 text-gray-400 hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
-                  <RotateCcw className="w-4 h-4" /> New Consultation
-                </button>
-                <a href="/booking" className="flex-[2] py-3 rounded-xl bg-neon-red hover:bg-neon-red-light text-white font-semibold transition-all flex items-center justify-center gap-2">
-                  <Sparkles className="w-4 h-4" /> Book with {result.artist}
-                </a>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* ── Footer Disclaimer ── */}
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="mt-16 text-center">
+          <div className="divider-ink max-w-xs mx-auto mb-6" />
+          <p className="text-cream-dim text-xs leading-relaxed max-w-lg mx-auto">
+            Style guides are curated by our artists based on their experience. For detailed designs and personalized advice, we recommend an in-person consultation with our artists TOON and RONNIE.
+          </p>
+        </motion.div>
 
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="text-gray-700 text-xs text-center mt-12">
-          AI consultations provide general guidance. For detailed designs, we recommend an in-person consultation with our artists TOON and RONNIE.
-        </motion.p>
       </div>
     </div>
     </>

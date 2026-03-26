@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { ChevronDown, ChevronUp, Search, ArrowRight, Clock, Shield, MessageCircle, CreditCard, MapPin, Phone, Mail, Heart } from 'lucide-react'
+import { ChevronDown, ChevronUp, Search, ArrowRight, Clock, Shield, MessageCircle, CreditCard, MapPin, Phone, Mail, Heart, Store, Wallet, Palette, HelpCircle } from 'lucide-react'
 import { STUDIO } from '../config'
 import SEO from '../components/SEO'
 
@@ -13,6 +13,14 @@ const fadeInUp = {
     y: 0,
     transition: { duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
   }),
+}
+
+const categoryIcons = {
+  General: Store,
+  'Pricing & Payment': Wallet,
+  Aftercare: Heart,
+  'Artists & Design': Palette,
+  'Safety & Policies': Shield,
 }
 
 const faqData = [
@@ -124,35 +132,51 @@ const faqData = [
   },
 ]
 
-function FAQItem({ question, answer }) {
+function FAQItem({ question, answer, index }) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className="border border-white/5 rounded-xl overflow-hidden transition-colors hover:border-white/10">
+    <motion.div
+      layout
+      className="border border-ink-border rounded-lg overflow-hidden transition-colors duration-300 hover:border-cream-muted/30"
+      style={{ background: 'rgba(20, 18, 16, 0.5)' }}
+    >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-6 py-5 flex items-center justify-between text-left gap-4"
+        className="w-full px-6 py-5 flex items-center justify-between text-left gap-4 group cursor-pointer"
+        id={`faq-${index}`}
+        aria-expanded={isOpen}
+        aria-controls={`faq-answer-${index}`}
       >
-        <span className="text-white text-sm font-medium">{question}</span>
-        {isOpen ? (
-          <ChevronUp className="w-4 h-4 text-gray-500 shrink-0" />
-        ) : (
-          <ChevronDown className="w-4 h-4 text-gray-500 shrink-0" />
-        )}
+        <span className="text-cream text-sm font-body font-medium leading-relaxed group-hover:text-cream-soft transition-colors duration-200">
+          {question}
+        </span>
+        <motion.span
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          className="shrink-0"
+        >
+          <ChevronDown className="w-4 h-4 text-cream-muted group-hover:text-crimson transition-colors duration-200" />
+        </motion.span>
       </button>
       {isOpen && (
         <motion.div
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: 'auto', opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="px-6 pb-5 text-gray-400 text-sm leading-relaxed whitespace-pre-line">
+          <div
+            id={`faq-answer-${index}`}
+            role="region"
+            aria-labelledby={`faq-${index}`}
+            className="px-6 pb-5 text-cream-muted text-sm font-body leading-relaxed whitespace-pre-line border-t border-ink-border/50 pt-4"
+          >
             {answer}
           </div>
         </motion.div>
       )}
-    </div>
+    </motion.div>
   )
 }
 
@@ -177,123 +201,187 @@ export default function Faq() {
   return (
     <>
       <SEO title="FAQ — Tattoo Questions Answered" description="Frequently asked questions about Earth Gang Tattoo Chiang Mai. Pricing, aftercare, hours, location, deposits, artist specialties, and booking info. 064-639-4795." path="/faq" />
-      <div className="min-h-screen pt-32 pb-32 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <motion.div ref={ref} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="text-center mb-16">
-          <motion.div custom={0} variants={fadeInUp}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-red/10 border border-neon-red/20 mb-6">
-              <MessageCircle className="w-4 h-4 text-neon-red" />
-              <span className="text-neon-red text-sm font-medium">Got Questions?</span>
+
+      <div className="min-h-screen pt-32 pb-32 px-4 sm:px-6 lg:px-8 ink-wash">
+        <div className="max-w-4xl mx-auto">
+
+          {/* ── Header ── */}
+          <motion.div ref={ref} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="text-center mb-20">
+            <motion.div custom={0} variants={fadeInUp}>
+              <span className="label-mono inline-flex items-center gap-2 px-4 py-2 rounded-full border border-crimson/20 bg-crimson/5 text-crimson text-xs tracking-widest uppercase mb-8">
+                <MessageCircle className="w-3.5 h-3.5" />
+                Got Questions?
+              </span>
+            </motion.div>
+            <motion.h1 custom={1} variants={fadeInUp} className="heading-editorial text-4xl sm:text-5xl lg:text-6xl text-cream">
+              Frequently Asked <span className="font-serif text-crimson italic">Questions</span>
+            </motion.h1>
+            <motion.p custom={2} variants={fadeInUp} className="font-body text-cream-muted mt-5 max-w-2xl mx-auto text-sm leading-relaxed">
+              Everything you need to know about our studio, pricing, aftercare, and the tattoo experience at Earth Gang.
+            </motion.p>
+          </motion.div>
+
+          {/* ── Search ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="mb-8"
+          >
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-cream-dim" />
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search questions..."
+                className="input-ink w-full pl-11 pr-4 py-3.5 rounded-lg font-body text-sm text-cream placeholder:text-cream-dim"
+              />
             </div>
           </motion.div>
-          <motion.h1 custom={1} variants={fadeInUp} className="text-4xl sm:text-5xl font-bold text-white">
-            Frequently Asked Questions
-          </motion.h1>
-          <motion.p custom={2} variants={fadeInUp} className="text-gray-500 mt-5 max-w-2xl mx-auto">
-            Find answers to common questions about our studio, pricing, aftercare, and more.
-          </motion.p>
-        </motion.div>
 
-        {/* Search */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mb-8"
-        >
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search questions..."
-              className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-neon-red/50 transition-colors"
-            />
+          {/* ── Category Filter Pills ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="flex flex-wrap gap-2 mb-14"
+          >
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-5 py-2.5 rounded-lg text-xs font-mono tracking-wide uppercase transition-all duration-300 cursor-pointer ${
+                  activeCategory === cat
+                    ? 'bg-crimson text-cream shadow-lg shadow-crimson/20 border border-crimson'
+                    : 'bg-ink-card text-cream-muted hover:bg-ink-elevated hover:text-cream border border-ink-border hover:border-cream-muted/20'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </motion.div>
+
+          {/* ── FAQ Sections ── */}
+          <div className="space-y-16">
+            {filteredFAQ.map((cat, catIdx) => {
+              const IconComponent = categoryIcons[cat.category] || HelpCircle
+              return (
+                <motion.div
+                  key={cat.category}
+                  initial={{ opacity: 0, y: 25 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: catIdx * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  {/* Category Header */}
+                  <div className="flex items-center gap-4 mb-6">
+                    <span className="text-lg">{cat.icon}</span>
+                    <div className="flex items-center gap-3 flex-1">
+                      <IconComponent className="w-4 h-4 text-crimson shrink-0" />
+                      <h2 className="font-body text-sm font-semibold text-cream uppercase tracking-wider">{cat.category}</h2>
+                      <span className="label-mono text-[10px] text-cream-dim">{cat.questions.length}</span>
+                      <div className="flex-1 h-px divider-ink" />
+                    </div>
+                  </div>
+
+                  {/* Accordion Items */}
+                  <div className="space-y-3">
+                    {cat.questions.map((q, i) => (
+                      <FAQItem key={i} question={q.q} answer={q.a} index={i} />
+                    ))}
+                  </div>
+                </motion.div>
+              )
+            })}
           </div>
-        </motion.div>
 
-        {/* Category filters */}
-        <div className="flex flex-wrap gap-2 mb-10">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                activeCategory === cat
-                  ? 'bg-neon-red text-white'
-                  : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/5'
-              }`}
+          {/* ── No Results ── */}
+          {filteredFAQ.length === 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-20"
             >
-              {cat}
-            </button>
-          ))}
-        </div>
+              <Search className="w-12 h-12 text-ink-border mx-auto mb-4" />
+              <p className="font-body text-cream-muted text-sm">No questions match your search.</p>
+              <button
+                onClick={() => { setSearchTerm(''); setActiveCategory('All') }}
+                className="mt-4 text-crimson text-xs font-mono uppercase tracking-wider hover:text-crimson-light transition-colors cursor-pointer"
+              >
+                Clear filters
+              </button>
+            </motion.div>
+          )}
 
-        {/* FAQ Sections */}
-        <div className="space-y-14">
-          {filteredFAQ.map((cat) => (
-            <div key={cat.category}>
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-xl">{cat.icon}</span>
-                <h2 className="text-lg font-semibold text-white">{cat.category}</h2>
-                <div className="flex-1 h-px bg-white/5" />
+          {/* ── Divider ── */}
+          <div className="divider-crimson my-20" />
+
+          {/* ── Quick Info Cards ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+            className="grid sm:grid-cols-2 gap-6"
+          >
+            {/* Hours Card */}
+            <div className="card-ink rounded-lg p-8 group hover:border-crimson/20 transition-colors duration-300">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-9 h-9 rounded-lg bg-crimson/10 border border-crimson/20 flex items-center justify-center">
+                  <Clock className="w-4 h-4 text-crimson" />
+                </div>
+                <h3 className="font-body text-sm font-semibold text-cream uppercase tracking-wider">Studio Hours</h3>
               </div>
-              <div className="space-y-3">
-                {cat.questions.map((q, i) => (
-                  <FAQItem key={i} question={q.q} answer={q.a} />
-                ))}
+              <p className="text-cream-muted text-sm font-body leading-relaxed">
+                {STUDIO.hoursNote}: {STUDIO.hours}
+              </p>
+              <p className="text-cream-dim text-xs font-body mt-2">
+                Walk-ins welcome when available
+              </p>
+            </div>
+
+            {/* Contact Card */}
+            <div className="card-ink rounded-lg p-8 group hover:border-crimson/20 transition-colors duration-300">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-9 h-9 rounded-lg bg-crimson/10 border border-crimson/20 flex items-center justify-center">
+                  <Phone className="w-4 h-4 text-crimson" />
+                </div>
+                <h3 className="font-body text-sm font-semibold text-cream uppercase tracking-wider">Contact Us</h3>
+              </div>
+              <div className="text-cream-muted text-sm font-body space-y-2">
+                <span className="flex items-center gap-2.5">
+                  <MapPin className="w-3.5 h-3.5 text-cream-dim shrink-0" />
+                  {STUDIO.addressShort}
+                </span>
+                <span className="flex items-center gap-2.5">
+                  <Phone className="w-3.5 h-3.5 text-cream-dim shrink-0" />
+                  {STUDIO.phone}
+                </span>
+                <span className="flex items-center gap-2.5">
+                  <Mail className="w-3.5 h-3.5 text-cream-dim shrink-0" />
+                  {STUDIO.email}
+                </span>
               </div>
             </div>
-          ))}
-        </div>
+          </motion.div>
 
-        {/* No results */}
-        {filteredFAQ.length === 0 && (
-          <div className="text-center py-16">
-            <Search className="w-12 h-12 text-gray-700 mx-auto mb-4" />
-            <p className="text-gray-500">No questions match your search.</p>
-          </div>
-        )}
-
-        {/* Quick links */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="mt-20 grid sm:grid-cols-2 gap-6"
-        >
-          <div className="p-8 rounded-2xl border border-white/5 bg-white/[0.02]">
-            <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-              <Clock className="w-4 h-4 text-neon-red" /> Studio Hours
-            </h3>
-            <p className="text-gray-500 text-sm">{STUDIO.hoursNote}: {STUDIO.hours}</p>
-          </div>
-          <div className="p-8 rounded-2xl border border-white/5 bg-white/[0.02]">
-            <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-              <Phone className="w-4 h-4 text-neon-red" /> Contact Us
-            </h3>
-            <p className="text-gray-500 text-sm">
-              <span className="flex items-center gap-2"><MapPin className="w-3.5 h-3.5" /> {STUDIO.addressShort}</span>
-              <span className="flex items-center gap-2 mt-1"><Phone className="w-3.5 h-3.5" /> {STUDIO.phone}</span>
-              <span className="flex items-center gap-2 mt-1"><Mail className="w-3.5 h-3.5" /> {STUDIO.email}</span>
-            </p>
-          </div>
-        </motion.div>
-
-        {/* CTA */}
-        <div className="mt-16 text-center">
-          <p className="text-gray-500 text-sm mb-4">Still have questions? Chat with us instantly!</p>
-          <Link
-            to="/booking"
-            className="inline-flex items-center gap-2 bg-neon-red hover:bg-neon-red-light text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg shadow-neon-red/25"
+          {/* ── CTA ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            className="mt-16 text-center"
           >
-            Book Now <ArrowRight className="w-4 h-4" />
-          </Link>
+            <p className="text-cream-muted text-sm font-body mb-6">
+              Still have questions? We're happy to help.
+            </p>
+            <Link to="/booking" className="btn-crimson inline-flex items-center gap-3 px-10 py-4 rounded-lg font-body font-semibold text-sm tracking-wide uppercase transition-all duration-300">
+              Book a Free Consultation
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+
         </div>
       </div>
-    </div>
     </>
   )
 }

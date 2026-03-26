@@ -2,6 +2,7 @@ import { StrictMode, Component } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
+import { LanguageProvider } from './i18n/LanguageContext'
 import './index.css'
 import App from './App.jsx'
 
@@ -20,7 +21,7 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.error) {
       return (
-        <div style={{ padding: '2rem', color: '#dc2626', fontFamily: 'monospace' }}>
+        <div role="alert" style={{ padding: '2rem', color: '#dc2626', fontFamily: 'monospace' }}>
           <h2>Something went wrong</h2>
           <p>{this.state.error.toString()}</p>
           <pre style={{ fontSize: '12px', color: '#888', whiteSpace: 'pre-wrap' }}>
@@ -44,7 +45,9 @@ createRoot(document.getElementById('root')).render(
     <HelmetProvider>
       <BrowserRouter>
         <ErrorBoundary>
-          <App />
+          <LanguageProvider>
+            <App />
+          </LanguageProvider>
         </ErrorBoundary>
       </BrowserRouter>
     </HelmetProvider>

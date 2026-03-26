@@ -78,7 +78,7 @@ const config = {
     {
       name: "Yuki T.",
       location: "Japan",
-      text: "The work is absolutely stunning. My vague idea was turned into something far beyond my expectations. The AI consultation feature helped me nail down the design before I even arrived!",
+      text: "The work is absolutely stunning. My vague idea was turned into something far beyond my expectations. The style guide tool helped me nail down the perfect design before I even arrived!",
       rating: 5,
     },
   ],
@@ -88,22 +88,18 @@ const config = {
   // ============================================
   galleryCategories: [
     "All", "Fine Line", "Traditional", "Realism",
-    "Neo-Traditional", "Geometric", "Japanese",
+    "Neo-Traditional", "Geometric", "Japanese", "Blackwork", "Minimal",
   ],
 
   galleryItems: [
-    { category: "Fine Line", label: "Delicate Rose", image: "https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=400&h=400&fit=crop", size: "small" },
-    { category: "Traditional", label: "Classic Anchor", image: "https://images.unsplash.com/photo-1590246815117-c0728ef83a4b?w=400&h=400&fit=crop", size: "small" },
-    { category: "Realism", label: "Portrait Study", image: "https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?w=400&h=400&fit=crop", size: "large" },
-    { category: "Neo-Traditional", label: "Tiger Flash", image: "https://images.unsplash.com/photo-1542556398-95fb5b9f9309?w=400&h=400&fit=crop", size: "small" },
-    { category: "Fine Line", label: "Butterfly Wing", image: "https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=500&h=500&fit=crop", size: "small" },
-    { category: "Geometric", label: "Sacred Geometry", image: "https://images.unsplash.com/photo-1590246815117-c0728ef83a4b?w=500&h=500&fit=crop", size: "large" },
-    { category: "Japanese", label: "Koi Dragon", image: "https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?w=500&h=500&fit=crop", size: "small" },
-    { category: "Neo-Traditional", label: "Snake & Rose", image: "https://images.unsplash.com/photo-1542556398-95fb5b9f9309?w=500&h=500&fit=crop", size: "small" },
-    { category: "Traditional", label: "Dagger & Heart", image: "https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=600&h=600&fit=crop", size: "small" },
-    { category: "Realism", label: "Cherry Blossom", image: "https://images.unsplash.com/photo-1590246815117-c0728ef83a4b?w=600&h=600&fit=crop", size: "large" },
-    { category: "Fine Line", label: "Moon Phase", image: "https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?w=600&h=600&fit=crop", size: "small" },
-    { category: "Japanese", label: "Cherry Wave", image: "https://images.unsplash.com/photo-1542556398-95fb5b9f9309?w=600&h=600&fit=crop", size: "small" },
+    { category: "Fine Line", label: "Fine Line Rose", image: null, size: "small", artist: "RONNIE" },
+    { category: "Traditional", label: "Sakura Anchor", image: null, size: "small", artist: "TOON" },
+    { category: "Japanese", label: "Koi Sleeve", image: null, size: "large", artist: "TOON" },
+    { category: "Geometric", label: "Dotwork Mandala", image: null, size: "small", artist: "RONNIE" },
+    { category: "Realism", label: "Tiger Portrait", image: null, size: "small", artist: "TOON" },
+    { category: "Neo-Traditional", label: "Dragon & Peony", image: null, size: "large", artist: "TOON" },
+    { category: "Blackwork", label: "Cybersigilism Arm", image: null, size: "small", artist: "RONNIE" },
+    { category: "Minimal", label: "Single Needle Crescent", image: null, size: "small", artist: "RONNIE" },
   ],
 }
 

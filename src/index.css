@@ -1,15 +1,40 @@
 @import "tailwindcss";
 
+/* ============================================
+   INK & ASH — Dark Editorial Luxury Design System
+   Earth Gang Tattoo · Chiang Mai
+   ============================================ */
+
 @theme {
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --color-dark: #0a0a0a;
-  --color-dark-light: #111111;
-  --color-dark-card: #1a1a1a;
-  --color-dark-border: #2a2a2a;
-  --color-neon-red: #dc2626;
-  --color-neon-red-light: #ef4444;
-  --color-gold: #f59e0b;
-  --color-gold-light: #fbbf24;
+  /* Fonts */
+  --font-display: 'Syne', sans-serif;
+  --font-serif: 'Instrument Serif', serif;
+  --font-body: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Core palette — warm, ink-stained blacks */
+  --color-ink: #0B0A08;
+  --color-ink-light: #131110;
+  --color-ink-card: #1A1714;
+  --color-ink-elevated: #221F1A;
+  --color-ink-border: #2E2A24;
+  --color-ink-hover: #3A352D;
+
+  /* Text — warm cream tones */
+  --color-cream: #EDE6DD;
+  --color-cream-soft: #C4BCB2;
+  --color-cream-muted: #8A8279;
+  --color-cream-dim: #7A756D;
+
+  /* Accent — rich crimson & aged gold */
+  --color-crimson: #C41E3A;
+  --color-crimson-light: #D9304F;
+  --color-crimson-dark: #9E1830;
+  --color-crimson-glow: rgba(196, 30, 58, 0.15);
+  --color-gold: #C9A84C;
+  --color-gold-light: #DABB6E;
+  --color-gold-dark: #A68B3C;
+  --color-gold-glow: rgba(201, 168, 76, 0.15);
 }
 
 * {
@@ -23,9 +48,9 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
-  background-color: #0a0a0a;
-  color: #e5e5e5;
+  font-family: var(--font-body);
+  background-color: var(--color-ink);
+  color: var(--color-cream-soft);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -36,102 +61,468 @@ body {
   width: 100%;
 }
 
-/* Custom scrollbar */
+/* ============================================
+   FILM GRAIN OVERLAY
+   ============================================ */
+.grain-overlay {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+/* ============================================
+   INK-WASH TEXTURE BACKGROUNDS
+   ============================================ */
+.ink-wash {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(196, 30, 58, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(196, 30, 58, 0.05) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 80%, rgba(201, 168, 76, 0.04) 0%, transparent 50%);
+}
+
+.ink-wash-hero {
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(196, 30, 58, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 60%, rgba(201, 168, 76, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(196, 30, 58, 0.08) 0%, transparent 40%);
+}
+
+.ink-wash-gold {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(201, 168, 76, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(201, 168, 76, 0.04) 0%, transparent 40%);
+}
+
+/* ============================================
+   CUSTOM SCROLLBAR
+   ============================================ */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: var(--color-ink);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
+  background: var(--color-ink-hover);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--color-cream-dim);
 }
 
-/* React Big Calendar overrides */
+/* ============================================
+   TYPOGRAPHY HELPERS
+   ============================================ */
+.text-balance {
+  text-wrap: balance;
+}
+
+.heading-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.heading-editorial {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   DECORATIVE ELEMENTS
+   ============================================ */
+.divider-ink {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-ink-border) 20%,
+    var(--color-ink-hover) 50%,
+    var(--color-ink-border) 80%,
+    transparent 100%
+  );
+}
+
+.divider-crimson {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(196, 30, 58, 0.3) 30%,
+    rgba(196, 30, 58, 0.5) 50%,
+    rgba(196, 30, 58, 0.3) 70%,
+    transparent 100%
+  );
+}
+
+/* Brush stroke underline effect */
+.brush-underline {
+  position: relative;
+  display: inline-block;
+}
+.brush-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: -4px;
+  right: -4px;
+  height: 8px;
+  background: var(--color-crimson);
+  opacity: 0.3;
+  border-radius: 4px;
+  z-index: -1;
+  transform: skewX(-8deg) scaleX(0);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: left;
+}
+.brush-underline:hover::after {
+  transform: skewX(-8deg) scaleX(1);
+}
+
+/* ============================================
+   CARD STYLES
+   ============================================ */
+.card-ink {
+  background: var(--color-ink-card);
+  border: 1px solid var(--color-ink-border);
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-ink:hover {
+  border-color: var(--color-ink-hover);
+  background: var(--color-ink-elevated);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn-crimson {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--color-crimson);
+  color: var(--color-cream);
+  padding: 0.875rem 2rem;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 20px -4px rgba(196, 30, 58, 0.4);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+.btn-crimson:hover {
+  background: var(--color-crimson-light);
+  box-shadow: 0 8px 30px -4px rgba(196, 30, 58, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--color-cream);
+  padding: 0.875rem 2rem;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.9rem;
+  border: 1px solid var(--color-ink-border);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-ghost:hover {
+  border-color: var(--color-ink-hover);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ============================================
+   REACT BIG CALENDAR OVERRIDES
+   ============================================ */
 .rbc-calendar {
   background: transparent !important;
-  font-family: var(--font-sans) !important;
+  font-family: var(--font-body) !important;
 }
 
 .rbc-toolbar button {
-  color: #e5e5e5 !important;
-  border: 1px solid #2a2a2a !important;
-  background: #1a1a1a !important;
+  color: var(--color-cream-soft) !important;
+  border: 1px solid var(--color-ink-border) !important;
+  background: var(--color-ink-card) !important;
   border-radius: 8px !important;
   padding: 6px 12px !important;
   font-size: 14px !important;
+  font-family: var(--font-body) !important;
   transition: all 0.2s !important;
 }
 
 .rbc-toolbar button:hover {
-  background: #dc2626 !important;
-  border-color: #dc2626 !important;
-  color: #fff !important;
+  background: var(--color-crimson) !important;
+  border-color: var(--color-crimson) !important;
+  color: var(--color-cream) !important;
 }
 
 .rbc-toolbar button.rbc-active {
-  background: #dc2626 !important;
-  border-color: #dc2626 !important;
-  color: #fff !important;
+  background: var(--color-crimson) !important;
+  border-color: var(--color-crimson) !important;
+  color: var(--color-cream) !important;
 }
 
 .rbc-header {
-  color: #9ca3af !important;
-  border-bottom: 1px solid #2a2a2a !important;
+  color: var(--color-cream-muted) !important;
+  border-bottom: 1px solid var(--color-ink-border) !important;
   padding: 8px 4px !important;
   font-weight: 600 !important;
   font-size: 13px !important;
+  font-family: var(--font-body) !important;
 }
 
 .rbc-month-view,
 .rbc-time-view,
 .rbc-agenda-view {
-  border: 1px solid #2a2a2a !important;
+  border: 1px solid var(--color-ink-border) !important;
   border-radius: 12px !important;
   overflow: hidden;
 }
 
 .rbc-month-row + .rbc-month-row {
-  border-top: 1px solid #1f1f1f !important;
+  border-top: 1px solid var(--color-ink-light) !important;
 }
 
 .rbc-day-bg + .rbc-day-bg {
-  border-left: 1px solid #1f1f1f !important;
+  border-left: 1px solid var(--color-ink-light) !important;
 }
 
 .rbc-header + .rbc-header {
-  border-left: 1px solid #2a2a2a !important;
+  border-left: 1px solid var(--color-ink-border) !important;
 }
 
 .rbc-off-range-bg {
-  background: #0f0f0f !important;
+  background: var(--color-ink) !important;
 }
 
 .rbc-today {
-  background: rgba(220, 38, 38, 0.08) !important;
+  background: rgba(196, 30, 58, 0.08) !important;
 }
 
 .rbc-date-cell {
-  color: #e5e5e5 !important;
+  color: var(--color-cream-soft) !important;
   padding: 4px !important;
   font-size: 14px !important;
 }
 
 .rbc-event {
-  background: #dc2626 !important;
+  background: var(--color-crimson) !important;
   border-radius: 4px !important;
   font-size: 11px !important;
   border: none !important;
 }
 
 .rbc-day-bg:hover {
-  background: rgba(220, 38, 38, 0.04) !important;
+  background: rgba(196, 30, 58, 0.04) !important;
   cursor: pointer;
+}
+
+/* ============================================
+   INPUT STYLES (shared)
+   ============================================ */
+.input-ink {
+  width: 100%;
+  background: var(--color-ink-light);
+  border: 1px solid var(--color-ink-border);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  transition: all 0.25s ease;
+  outline: none;
+}
+.input-ink::placeholder {
+  color: var(--color-cream-dim);
+}
+.input-ink:focus {
+  border-color: var(--color-crimson);
+  box-shadow: 0 0 0 3px var(--color-crimson-glow);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes ink-drip {
+  0% { clip-path: inset(0 0 100% 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes subtle-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ============================================
+   ACCESSIBILITY — WCAG 2.2 Compliance
+   ============================================ */
+
+/* Skip to content link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-crimson);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  transition: top 0.2s ease;
+  box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3);
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Focus visible styles */
+:focus-visible {
+  outline: 2px solid var(--color-crimson);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Override for specific elements */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none; /* Use the input-ink focus styles instead */
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .grain-overlay {
+    display: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --color-ink: #000000;
+    --color-cream: #FFFFFF;
+    --color-cream-muted: #CCCCCC;
+    --color-cream-dim: #888888;
+    --color-ink-border: #444444;
+    --color-crimson: #FF0000;
+    --color-gold: #FFD700;
+  }
+}
+
+/* ============================================
+   SCROLL-TO-TOP BUTTON
+   ============================================ */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 6rem;
+  right: 1.5rem;
+  z-index: 40;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-ink-card);
+  border: 1px solid var(--color-ink-border);
+  color: var(--color-cream-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+.scroll-top-btn:hover {
+  border-color: var(--color-crimson);
+  color: var(--color-crimson);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Mobile: move scroll-to-top to left to avoid chat widget overlap */
+@media (max-width: 480px) {
+  .scroll-top-btn.left-side {
+    left: 1rem;
+    right: auto;
+  }
+}
+
+/* ============================================
+   LOADING SKELETON
+   ============================================ */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-ink-card) 25%,
+    var(--color-ink-elevated) 50%,
+    var(--color-ink-card) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }

@@ -19,7 +19,7 @@ const faqResponses = {
   },
   location: {
     keywords: ['location', 'where', 'address', 'direction', 'parking', 'bts', 'mrt', 'find', 'chiang mai', 'thailand'],
-    answer: `📍 **Location**\n\n${STUDIO.address}\n\n📍 ${STUDIO.addressShort}\n\nWe're easy to find — look for the red neon sign!`,
+    answer: `📍 **Location**\n\n${STUDIO.address}\n\n📍 ${STUDIO.addressShort}\n\nWe're easy to find — look for the crimson glow!`,
   },
   deposit: {
     keywords: ['deposit', 'payment', 'pay', 'card', 'cash', 'transfer', 'promptpay', 'refund', 'cancel'],
@@ -43,8 +43,8 @@ function getResponse(input) {
 
 const formatMessage = (text) => {
   return text.split('\n').map((line, i) => {
-    let processed = line.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')
-    processed = processed.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-neon-red hover:underline">$1</a>')
+    let processed = line.replace(/\*\*(.*?)\*\*/g, '<strong class="text-cream font-semibold">$1</strong>')
+    processed = processed.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-crimson hover:text-crimson-light transition-colors underline underline-offset-2">$1</a>')
     return (
       <span key={i}>
         <span dangerouslySetInnerHTML={{ __html: processed }} />
@@ -65,6 +65,8 @@ export default function ChatWidget() {
   ])
   const [input, setInput] = useState('')
   const [isTyping, setIsTyping] = useState(false)
+  const [emailRequested, setEmailRequested] = useState(false)
+  const [userEmail, setUserEmail] = useState('')
   const messagesEndRef = useRef(null)
 
   const scrollToBottom = () => {
@@ -89,13 +91,9 @@ export default function ChatWidget() {
       setMessages((prev) => [...prev, { id: Date.now() + 1, from: 'bot', text: response }])
       setIsTyping(false)
 
-      // If bot gives the fallback response, send the message to your email
+      // If bot gives the fallback response, offer to forward to studio
       if (response.includes('call us at')) {
-        try {
-          await sendChatMessage('', msgText)
-        } catch (e) {
-          console.log('Email failed:', e.message)
-        }
+        setEmailRequested(true)
       }
     }, 800 + Math.random() * 1200)
   }
@@ -107,6 +105,26 @@ export default function ChatWidget() {
     }
   }
 
+  const handleEmailSubmit = async () => {
+    if (!userEmail.trim()) return
+    try {
+      await sendChatMessage('', messages.find(m => m.from === 'user')?.text || '', userEmail.trim())
+      setMessages(prev => [...prev, { 
+        id: Date.now() + 2, 
+        from: 'bot', 
+        text: "✅ Message received! We'll get back to you within 24 hours at **" + userEmail.trim() + "**. You can also reach us directly at 📞 064-639-4795." 
+      }])
+    } catch {
+      setMessages(prev => [...prev, { 
+        id: Date.now() + 2, 
+        from: 'bot', 
+        text: "⚠️ Sorry, we couldn't send your message right now. Please email us directly at **earthgangtattoo@gmail.com** or call **064-639-4795**." 
+      }])
+    }
+    setEmailRequested(false)
+    setUserEmail('')
+  }
+
   return (
     <div className="fixed bottom-6 right-6 z-50">
       {/* Chat Panel */}
@@ -116,45 +134,53 @@ export default function ChatWidget() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="mb-4 w-[360px] max-w-[calc(100vw-48px)] h-[480px] max-h-[calc(100vh-120px)] rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/50 flex flex-col"
-            style={{ background: 'linear-gradient(135deg, #111111 0%, #0a0a0a 100%)' }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-4 w-[380px] max-w-[calc(100vw-48px)] h-[500px] max-h-[calc(100vh-120px)] rounded-2xl overflow-hidden border border-ink-border shadow-2xl shadow-black/60 flex flex-col bg-ink-card"
+                role="dialog"
+                aria-label="Live chat"
           >
             {/* Header */}
-            <div className="px-4 py-4 border-b border-white/5 flex items-center justify-between shrink-0"
-              style={{ background: 'linear-gradient(135deg, rgba(220,38,38,0.15) 0%, rgba(17,17,17,0.95) 100%)' }}
+            <div
+              className="px-5 py-4 border-b border-ink-border flex items-center justify-between shrink-0"
+              style={{ background: 'linear-gradient(135deg, rgba(185,28,28,0.12) 0%, rgba(15,12,10,0.98) 100%)' }}
             >
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-neon-red/20 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-full bg-crimson/15 border border-crimson/20 flex items-center justify-center">
                   <span className="text-sm">🔥</span>
                 </div>
                 <div>
-                  <p className="text-white text-sm font-semibold">Earth Gang Tattoo</p>
-                  <p className="text-green-400 text-[11px] flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 bg-green-400 rounded-full inline-block"></span>
-                    Online now
+                  <p className="text-cream text-sm font-display tracking-wide uppercase">Earth Gang</p>
+                  <p className="text-cream-muted text-[11px] font-body flex items-center gap-1.5 mt-0.5">
+                    <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full inline-block animate-pulse"></span>
+                    Online now — typically replies instantly
                   </p>
                 </div>
               </div>
-              <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-white transition-colors">
+              <button
+                onClick={() => setIsOpen(false)}
+                className="text-cream-dim hover:text-cream transition-colors duration-200 p-1 rounded-lg hover:bg-ink-hover"
+              >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-ink/50 scroll-smooth"
+                  aria-live="polite"
+                  aria-label="Chat messages">
               {messages.map((msg) => (
                 <motion.div
                   key={msg.id}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
                   className={`flex ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[85%] px-3.5 py-2.5 rounded-2xl text-[13px] leading-relaxed ${
+                    className={`max-w-[85%] px-4 py-3 text-[13px] leading-relaxed font-body ${
                       msg.from === 'user'
-                        ? 'bg-neon-red text-white rounded-br-md'
-                        : 'bg-white/5 text-gray-300 rounded-bl-md'
+                        ? 'bg-crimson text-cream rounded-2xl rounded-br-md shadow-lg shadow-crimson/20'
+                        : 'bg-ink-elevated text-cream-soft border border-ink-border rounded-2xl rounded-bl-md'
                     }`}
                   >
                     {formatMessage(msg.text)}
@@ -167,14 +193,14 @@ export default function ChatWidget() {
                   animate={{ opacity: 1 }}
                   className="flex justify-start"
                 >
-                  <div className="bg-white/5 px-4 py-3 rounded-2xl rounded-bl-md">
+                  <div className="bg-ink-elevated border border-ink-border px-5 py-3.5 rounded-2xl rounded-bl-md">
                     <div className="flex gap-1.5">
                       {[0, 1, 2].map((i) => (
                         <motion.div
                           key={i}
-                          className="w-2 h-2 bg-gray-500 rounded-full"
-                          animate={{ y: [0, -5, 0] }}
-                          transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.15 }}
+                          className="w-2 h-2 bg-cream-dim rounded-full"
+                          animate={{ y: [0, -5, 0], opacity: [0.4, 1, 0.4] }}
+                          transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }}
                         />
                       ))}
                     </div>
@@ -184,8 +210,36 @@ export default function ChatWidget() {
               <div ref={messagesEndRef} />
             </div>
 
+            {/* Email prompt */}
+            {emailRequested && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mx-4 mb-3 p-3 rounded-xl bg-ink-elevated border border-ink-border"
+              >
+                <p className="text-cream-soft text-xs mb-2">📧 Leave your email so we can follow up:</p>
+                <div className="flex gap-2">
+                  <input
+                    type="email"
+                    value={userEmail}
+                    onChange={(e) => setUserEmail(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleEmailSubmit()}
+                    placeholder="your@email.com"
+                    className="input-ink flex-1 !py-2 !text-xs !rounded-lg"
+                  />
+                  <button
+                    onClick={handleEmailSubmit}
+                    disabled={!userEmail.trim()}
+                    className="btn-crimson !px-3 !py-2 !text-xs !rounded-lg disabled:opacity-25"
+                  >
+                    Send
+                  </button>
+                </div>
+              </motion.div>
+            )}
+
             {/* Input */}
-            <div className="p-3 border-t border-white/5 shrink-0">
+            <div className="p-3 border-t border-ink-border shrink-0 bg-ink-card">
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -193,16 +247,19 @@ export default function ChatWidget() {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
                   placeholder="Ask us anything..."
-                  className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-neon-red/50 transition-colors"
+                  className="input-ink flex-1 rounded-xl px-4 py-2.5 text-sm text-cream placeholder-cream-dim font-body"
                 />
                 <button
                   onClick={handleSend}
                   disabled={!input.trim()}
-                  className="w-10 h-10 rounded-xl bg-neon-red hover:bg-neon-red-light disabled:opacity-30 disabled:hover:bg-neon-red flex items-center justify-center transition-all duration-200 shrink-0"
+                  className="btn-crimson w-10 h-10 rounded-xl flex items-center justify-center shrink-0 disabled:opacity-25 disabled:cursor-not-allowed"
                 >
-                  <Send className="w-4 h-4 text-white" />
+                  <Send className="w-4 h-4 text-cream" />
                 </button>
               </div>
+              <p className="text-[10px] text-cream-dim text-center mt-2 font-body opacity-60">
+                Powered by Earth Gang Tattoo Studio
+              </p>
             </div>
           </motion.div>
         )}
@@ -210,19 +267,20 @@ export default function ChatWidget() {
 
       {/* Toggle Button */}
       <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.92 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full bg-neon-red hover:bg-neon-red-light shadow-lg shadow-neon-red/30 flex items-center justify-center transition-all duration-300 relative"
+        className="w-14 h-14 rounded-full bg-crimson hover:bg-crimson-light shadow-lg shadow-crimson/30 flex items-center justify-center transition-all duration-300 relative group"
+        aria-label={isOpen ? 'Close chat' : 'Open chat'}
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
-            <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}>
-              <X className="w-6 h-6 text-white" />
+            <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+              <X className="w-6 h-6 text-cream" />
             </motion.div>
           ) : (
-            <motion.div key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
-              <MessageCircle className="w-6 h-6 text-white" />
+            <motion.div key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+              <MessageCircle className="w-6 h-6 text-cream" />
             </motion.div>
           )}
         </AnimatePresence>
@@ -230,9 +288,12 @@ export default function ChatWidget() {
           <motion.span
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-dark"
+            exit={{ scale: 0 }}
+            className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-400 rounded-full border-2 border-ink shadow-sm shadow-emerald-400/40"
           />
         )}
+        {/* Glow ring on hover */}
+        <span className="absolute inset-0 rounded-full bg-crimson/0 group-hover:bg-crimson/10 transition-all duration-300 pointer-events-none" />
       </motion.button>
     </div>
   )

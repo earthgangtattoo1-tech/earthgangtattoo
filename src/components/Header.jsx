@@ -1,23 +1,25 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Flame } from 'lucide-react'
-
-const navLinks = [
-  { to: '/', label: 'Home' },
-  { to: '/booking', label: 'Booking' },
-  { to: '/gallery', label: 'Gallery' },
-  { to: '/consult', label: 'AI Consult' },
-  { to: '/faq', label: 'FAQ' },
-]
+import { useLang } from '../i18n/LanguageContext'
+import LanguageSwitch from './LanguageSwitch'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
+  const { t } = useLang()
+
+  const navLinks = [
+    { to: '/', label: t('nav.home', 'Home') },
+    { to: '/booking', label: t('nav.book', 'Book') },
+    { to: '/gallery', label: t('nav.gallery', 'Gallery') },
+    { to: '/consult', label: t('nav.consult', 'Style Guide') },
+    { to: '/faq', label: t('nav.faq', 'FAQ') },
+  ]
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20)
+    const handleScroll = () => setScrolled(window.scrollY > 30)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -30,45 +32,51 @@ export default function Header() {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
         scrolled
-          ? 'bg-dark/80 backdrop-blur-xl border-b border-white/5 shadow-2xl shadow-black/50'
+          ? 'bg-ink/90 backdrop-blur-xl border-b border-ink-border/50'
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <Flame className="w-8 h-8 text-neon-red group-hover:scale-110 transition-transform duration-300" />
+          {/* Logo — editorial mark */}
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="relative">
+              <div className="w-9 h-9 rounded-full border border-crimson/60 flex items-center justify-center group-hover:border-crimson transition-colors duration-500">
+                <span className="text-crimson font-display text-sm font-bold">EG</span>
+              </div>
+            </div>
             <div className="flex flex-col leading-none">
-              <span className="text-lg sm:text-xl font-black tracking-wider text-white">
-                EARTH GANG
+              <span className="font-display font-bold text-[15px] tracking-[0.08em] text-cream uppercase">
+                Earth Gang
               </span>
-              <span className="text-[10px] sm:text-xs font-light tracking-[0.3em] text-neon-red uppercase">
-                Tattoo
+              <span className="font-serif italic text-[11px] tracking-[0.04em] text-cream-muted mt-0.5">
+                Tattoo Studio
               </span>
             </div>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-5 ml-auto">
+          <nav className="hidden md:flex items-center gap-1 ml-auto" aria-label="Main navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`relative px-4 py-2 text-[15px] font-medium transition-colors duration-300 rounded-lg ${
+                className={`relative px-4 py-2 text-[13px] font-medium tracking-wide transition-colors duration-300 rounded-lg ${
                   location.pathname === link.to
-                    ? 'text-neon-red'
-                    : 'text-gray-400 hover:text-white'
+                    ? 'text-crimson'
+                    : 'text-cream-muted hover:text-cream-soft'
                 }`}
+                aria-current={location.pathname === link.to ? 'page' : undefined}
+                style={{ fontFamily: 'var(--font-body)' }}
               >
                 {link.label}
                 {location.pathname === link.to && (
                   <motion.div
                     layoutId="activeNav"
-                    className="absolute bottom-0 left-2 right-2 h-0.5 bg-neon-red rounded-full"
+                    className="absolute bottom-0 left-3 right-3 h-[2px] bg-crimson rounded-full"
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -76,10 +84,37 @@ export default function Header() {
             ))}
           </nav>
 
+          {/* Right side: Language switch + Book CTA + Instagram */}
+          <div className="hidden md:flex items-center gap-2 ml-5">
+            <LanguageSwitch />
+            <Link
+              to="/booking"
+              className="inline-flex items-center px-5 py-2.5 text-[13px] font-semibold text-cream bg-crimson rounded-lg hover:bg-crimson-light transition-all duration-300 shadow-lg shadow-crimson/20"
+            >
+              {t('nav.bookNow', 'Book Now')}
+            </Link>
+            <a
+              href="https://instagram.com/earthgangtattoo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-ink-border hover:border-crimson transition-all duration-300"
+              aria-label="Instagram"
+            >
+              <svg className="w-4 h-4 text-cream-muted hover:text-crimson" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+          </div>
+
           {/* Mobile Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+            className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-lg border border-ink-border bg-ink-light/50 hover:bg-ink-card transition-colors"
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isOpen}
+            aria-controls="mobile-nav"
           >
             <AnimatePresence mode="wait">
               {isOpen ? (
@@ -90,7 +125,9 @@ export default function Header() {
                   exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <X className="w-5 h-5 text-white" />
+                  <svg width="20" height="20" viewBox="0 0 16 16" fill="none" className="text-cream">
+                    <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
                 </motion.div>
               ) : (
                 <motion.div
@@ -100,7 +137,9 @@ export default function Header() {
                   exit={{ rotate: -90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Menu className="w-5 h-5 text-white" />
+                  <svg width="20" height="20" viewBox="0 0 16 16" fill="none" className="text-cream">
+                    <path d="M1 4H15M1 8H15M1 12H15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -112,32 +151,51 @@ export default function Header() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="mobile-nav"
+            role="navigation"
+            aria-label="Mobile navigation"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="md:hidden overflow-hidden bg-dark/95 backdrop-blur-xl border-t border-white/5"
+            className="md:hidden overflow-hidden bg-ink/95 backdrop-blur-2xl border-t border-ink-border/50"
           >
-            <nav className="px-4 py-6 space-y-2">
+            <nav className="px-5 py-6 space-y-1">
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.to}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -15 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
+                  transition={{ delay: i * 0.04 }}
                 >
                   <Link
                     to={link.to}
-                    className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors duration-200 ${
+                    className={`block px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
                       location.pathname === link.to
-                        ? 'text-neon-red bg-neon-red/10'
-                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                        ? 'text-crimson bg-crimson-glow'
+                        : 'text-cream-muted hover:text-cream-soft hover:bg-ink-card'
                     }`}
                   >
                     {link.label}
                   </Link>
                 </motion.div>
               ))}
+              <motion.div
+                initial={{ opacity: 0, x: -15 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navLinks.length * 0.04 }}
+                className="pt-3 flex items-center gap-3"
+              >
+                <Link
+                  to="/booking"
+                  className="block px-4 py-3 rounded-lg text-sm font-semibold text-cream bg-crimson text-center flex-1"
+                >
+                  {t('nav.bookNow', 'Book a Session')}
+                </Link>
+                <div className="flex-shrink-0">
+                  <LanguageSwitch />
+                </div>
+              </motion.div>
             </nav>
           </motion.div>
         )}

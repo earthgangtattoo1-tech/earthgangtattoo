@@ -18,6 +18,40 @@ export async function onRequestPost(context) {
       })
     }
 
+    // Server-side validation: date must be in the future
+    const bookingDate = new Date(date)
+    const now = new Date()
+    // Set to start of today in Thailand timezone (UTC+7)
+    const thailandOffset = 7 * 60
+    const utcNow = new Date(now.getTime() + now.getTimezoneOffset() * 60000)
+    const thailandNow = new Date(utcNow.getTime() + thailandOffset * 60000)
+    const todayThailand = new Date(thailandNow.getFullYear(), thailandNow.getMonth(), thailandNow.getDate())
+
+    if (isNaN(bookingDate.getTime()) || bookingDate < todayThailand) {
+      return new Response(JSON.stringify({ error: 'Date must be in the future' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      })
+    }
+
+    // Validate time is within business hours (10:00-20:00)
+    const timeNum = parseInt(time, 10)
+    if (isNaN(timeNum) || timeNum < 10 || timeNum >= 20) {
+      return new Response(JSON.stringify({ error: 'Time must be between 10:00 AM and 8:00 PM' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      })
+    }
+
+    // Basic email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return new Response(JSON.stringify({ error: 'Invalid email format' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      })
+    }
+
     // Get Resend API key from Cloudflare env
     const RESEND_API_KEY = env.RESEND_API_KEY
 
